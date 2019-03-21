@@ -1,0 +1,94 @@
+.titlereporteservicio{
+  text-align: center;
+}
+
+.preimagenvisitante{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.preimagenvisitante img{
+  position: relative;
+  top: 23px;
+  border: 1px solid #ABB2B9;
+  width:250;
+  height: 187;
+  }
+
+.bottoncenter{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  top: -5px;
+}
+
+#preimagenvisitante2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#preimagenvisitante2 img{
+  position: static;
+  top: 23px;
+  border: 1px solid #ABB2B9;
+  width:250;
+  height: 187;
+  }
+
+  #preimagenvisitante2 video{
+    position: static;
+    top: 23px;
+    border: 1px solid #ABB2B9;
+    width:250;
+    height: 187;
+    }
+
+
+  .bottoncentermodal{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative !important;
+  }
+
+  .marcofoto{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .marcofoto img{
+    position: static;
+    border: 3px solid #ABB2B9;
+  }
+
+  .centrarbotonesfoto{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative !important;
+  }
+
+  #fotoevidenciamarco{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #fotoevidenciamarco img{
+    position: relative;
+    top: 1px;
+    border: 1px solid #ABB2B9;
+    width:250;
+    height: 187;
+    }

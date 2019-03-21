@@ -1,0 +1,48 @@
+body{
+  background-image: url('../../../views/assets/images/backgroundLogin.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  /* background-color: #ffffff; */
+  /* background-size: 100%; */
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  zoom: 100%
+
+
+}
+
+#login img{
+  margin: 10px 0;
+}
+#login .center {
+  text-align: center;
+}
+
+#login .login {
+  max-width: 300px;
+	margin: 35px auto;
+}
+
+#login .login-form{
+  padding:0px 20px;
+}
+
+.remember-me{
+  margin: 10px;
+}
+
+.errorusuario{
+  color: red;
+}
+
+.passwordValidator{
+  color: red;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,93 @@
+# Impedir que se pueda ver el listado de contenidos de un directorio
+Options All -Indexes
+
+AuthType Basic
+AuthName "Autentificar"
+AuthUserFile C:\xampp\htdocs\.htpasswd
+require user covitecltda
+
+#AddDefaultCharset utf-8
+#AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
+ErrorDocument 403 /covitec/views/modules/errors/403.html
+ErrorDocument 404 /covitec/views/modules/errors/404.html
+ErrorDocument 500 /covitec/views/modules/errors/500.html
+
+
+# Url Amigables
+RewriteEngine On
+
+RewriteRule ^Inicio$                        index.php
+#Errores
+RewriteRule ^Error403$                      index.php?c=home&a=error403
+RewriteRule ^Error404$                      index.php?c=home&a=error404
+RewriteRule ^Error500$                      index.php?c=home&a=error500
+RewriteRule ^Error403-Rol$                  index.php?c=home&a=error403&error=definirrol
+#Mi Empresa
+RewriteRule ^MisionVision$                  index.php?c=company&a=viewMisionVision
+RewriteRule ^Valores$                       index.php?c=company&a=viewValores
+RewriteRule ^Planes$                        index.php?c=home&a=error500
+#Reporte
+RewriteRule ^ReporteNovedades$              index.php?c=novedad&a=wiewsNovedad
+RewriteRule ^ReporteDotacion$               index.php?c=dotacion&a=wiewsDotacion
+RewriteRule ^ReporteProtocolos$             index.php?c=protocolo&a=wiewsReporProto
+RewriteRule ^ReporteConsignas$              index.php?c=consigna&a=resporteConsig
+RewriteRule ^ReporteCirculares$             index.php?c=circular&a=wiewsReporCircu
+RewriteRule ^ReporteInstrucciones$          index.php?c=instruccion&a=wiewsReporInstru
+RewriteRule ^ReporteServicios$              index.php?c=servicio&a=wiewsServicio
+RewriteRule ^ReporteReparacionEquipo$       index.php?c=reparacionequipo&a=wiewsReparacionEquipo
+RewriteRule ^ReporteEquipoRegistro$         index.php?c=equipo&a=wiewsEquiposRegister
+
+#Consulta
+RewriteRule ^ConsultaNovedades$             index.php?c=novedad&a=wiewsConstnovedad
+RewriteRule ^ConsultaNovedades-Total$       index.php?c=novedad&a=wiewsConstnovedadTotal
+RewriteRule ^ConsultaDotacion$              index.php?c=dotacion&a=wiewsConstDotacion
+RewriteRule ^ConsultaDotacion-Total$        index.php?c=dotacion&a=wiewsConstDotacionTotal
+RewriteRule ^ConsultaProtocolos$            index.php?c=protocolo&a=consultProto
+RewriteRule ^ConsultaConsignas$             index.php?c=consigna&a=consulConsig
+RewriteRule ^ConsultaCirculares$            index.php?c=circular&a=consultCircu
+RewriteRule ^ConsultaInstrucciones$         index.php?c=instruccion&a=consultInstru
+RewriteRule ^ConsultaReparacionEquipo$      index.php?c=reparacionequipo&a=consulReparacionEquipo
+RewriteRule ^ConsultaEquipo$                index.php?c=equipo&a=wiewsConstEquipos
+
+#Visitantes
+RewriteRule ^VisitantesRegistro$            index.php?c=visitante&a=wiewsReporVisit
+RewriteRule ^VisitantesConsultaHoy$         index.php?c=visitante&a=wiewsConsulVisitHoy
+RewriteRule ^VisitantesConsulta$            index.php?c=visitante&a=wiewsConsulVisit
+RewriteRule ^VisitantesConsultaTotal$       index.php?c=visitante&a=wiewsConsulVisitTotal
+#Configuración
+RewriteRule ^CrearUsuario$                  index.php?c=home&a=wiewsCreateuser
+RewriteRule ^VerTodoLosUsuarios$            index.php?c=home&a=wiewsUser
+RewriteRule ^VerUsuarios$                   index.php?c=home&a=wiewsUserNormal
+RewriteRule ^CrearClienteSedes$             index.php?c=home&a=wiewsClienteSede
+RewriteRule ^MiPerfil$                      index.php?c=home&a=wiewsProfile
+RewriteRule ^CrearCargo$                    index.php?c=home&a=wiewsCharge
+#Acciones Protocolo
+RewriteRule ^Protocolo-Editar-(\w+)$        index.php?c=protocolo&a=wiewseditaProto&Editar=$1
+RewriteRule ^Protocolo-Reader-(\w+)$        index.php?c=protocolo&a=readerArchivoProto&Reader=$1
+RewriteRule ^Protocolo-Download-(\w+)$      index.php?c=protocolo&a=downloadedArchivoProto&Downloadg=$1
+#Acciones Consigna
+RewriteRule ^Consigna-Editar-(\w+)$         index.php?c=consigna&a=wiewseditarConsg&consig_id=$1
+RewriteRule ^Consigna-Reader-(\w+)$         index.php?c=consigna&a=readerArchivo&Reader=$1
+RewriteRule ^Consigna-Download-(\w+)$       index.php?c=consigna&a=downloadedArchivo&Downloadg=$1
+RewriteRule ^Consigna-EditarP-(\w+)$        index.php?c=consigna&a=wiewseditarConsgPart&Editar=$1
+RewriteRule ^Consigna-ReaderP-(\w+)$        index.php?c=consigna&a=readerArchivoParti&consigp_id=$1
+RewriteRule ^Consigna-DownloadP-(\w+)$      index.php?c=consigna&a=downloadedArchivoPart&Downloadg=$1
+#Acciones Circulares
+RewriteRule ^Circular-Editar-(\w+)$         index.php?c=circular&a=wiewseditaCircu&Editar=$1
+RewriteRule ^Circular-Reader-(\w+)$         index.php?c=circular&a=readerArchivoCircu&Reader=$1
+RewriteRule ^Circular-Download-(\w+)$       index.php?c=circular&a=downloadedArchivoCircu&Downloadg=$1
+#Acciones Instricciones
+RewriteRule ^Instruccion-Editar-(\w+)$      index.php?c=instruccion&a=wiewseditaInstru&Editar=$1
+RewriteRule ^Instruccion-Reader-(\w+)$      index.php?c=instruccion&a=readerArchivoInstru&Reader=$1
+RewriteRule ^Instruccion-Download-(\w+)$    index.php?c=instruccion&a=downloadedArchivoInstru&Downloadg=$1
+#Acciones Configuraciones
+RewriteRule ^Usuario-Editar-(\w+)$          index.php?c=home&a=wiewsEditarUser&id=$1
+#Acciones Equipos En Reparacíon
+RewriteRule ^ReEquipo-Detalle-(\w+)$        index.php?c=reparacionequipo&a=wiewsDalleteReparacionEquipo&Detalle=$1
+RewriteRule ^ReEquipo-Editar-(\w+)$         index.php?c=reparacionequipo&a=wiewsEditarReparacionEquipo&Editar=$1
+RewriteRule ^ReEquipo-Reader-(\w+)$         index.php?c=reparacionequipo&a=readerArchivoReEquipo&Reader=$1
+#Acciones Equipos
+RewriteRule ^Equipo-Detalle-(\w+)$          index.php?c=equipo&a=wiewsDalleteEquipo&Detalle=$1
+RewriteRule ^Equipo-Editar-(\w+)$           index.php?c=equipo&a=wiewsDalleteEquipo&Editar=$1
+RewriteRule ^Equipo-Acta-(\w+)$             index.php?c=equipo&a=ActaEntregaEquipo&Acta=$1
+RewriteRule ^EquipoLaptop-Detalle-(\w+)$    index.php?c=equipo&a=wiewsDalleteEquipoLaptop&Detalle=$1
