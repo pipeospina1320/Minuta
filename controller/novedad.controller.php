@@ -44,30 +44,34 @@ class NovedadController
                 $dirc_file = [];
                 $file_almacenado = false;
                 for ($i = 0; $i < $limite; $i++) {
-                    if ($_FILES["filenovedad"]['type'][$i] == "image/png" || $_FILES["filenovedad"]['type'][$i] == "image/jpg" || $_FILES["filenovedad"]['type'][$i] == "image/jpeg") {
-                        $hoy = date("dmYgis");
-                        $nom_archivo = $_FILES['filenovedad']['name'][$i];
-                        $new_nom_archivo = ($hoy . $nom_archivo);
-                        $target_path = "views/assets/images/novedad/";
-                        $dirc_file[] = ($target_path . $new_nom_archivo);
-                        $target_path = $target_path . basename($hoy . $_FILES['filenovedad']['name'][$i]);
-                        $array_nom_archivos[] = $new_nom_archivo;
-                        if (move_uploaded_file($_FILES['filenovedad']['tmp_name'][$i], $target_path)) {
-                            $file_almacenado = true;
+                    if ($_FILES["filenovedad"]['error'][$i] == 0) {
+                        if ($_FILES["filenovedad"]['type'][$i] == "image/png" || $_FILES["filenovedad"]['type'][$i] == "image/jpg" || $_FILES["filenovedad"]['type'][$i] == "image/jpeg") {
+                            $hoy = date("dmYgis");
+                            $nom_archivo = $_FILES['filenovedad']['name'][$i];
+                            $new_nom_archivo = ($hoy . $nom_archivo);
+                            $target_path = "views/assets/images/novedad/";
+                            $dirc_file[] = ($target_path . $new_nom_archivo);
+                            $target_path = $target_path . basename($hoy . $_FILES['filenovedad']['name'][$i]);
+                            $array_nom_archivos[] = $new_nom_archivo;
+                            if (move_uploaded_file($_FILES['filenovedad']['tmp_name'][$i], $target_path)) {
+                                $file_almacenado = true;
+                            } else {
+                                print_r("");
+                                $file_almacenado = false;
+                            }
                         } else {
                             print_r("");
-                            $file_almacenado = false;
                         }
-                    } else {
-                        print_r("");
                     }
                 }
                 if ($file_almacenado) {
                     $data = $_POST["frmnovedad"];
                     $novedad = array_map('strtoupper', $data);
                     $strNombreArchivos = implode(",", $array_nom_archivos);
+                    $dirc_firma1 = $this->uploadImgBase64($_POST['filenovedadFirma'][0]);
+                    $dirc_firma2 = $this->uploadImgBase64($_POST['filenovedadFirma'][1]);
                     $strDirectorioArchivos = implode(",", $dirc_file);
-                    $result = $this->model->createNovedades($novedad, $strDirectorioArchivos, $strNombreArchivos);
+                    $result = $this->model->createNovedades($novedad, $strDirectorioArchivos, $strNombreArchivos, $dirc_firma1, $dirc_firma2);
                     print_r($result);
                 } else {
                     print_r("");
@@ -75,9 +79,10 @@ class NovedadController
             } else {
                 $data = $_POST["frmnovedad"];
                 // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png)
-                $dirc_firma = $this->uploadImgBase64($_POST['filenovedadFirma']);
+                $dirc_firma1 = $this->uploadImgBase64($_POST['filenovedadFirma'][0]);
+                $dirc_firma2 = $this->uploadImgBase64($_POST['filenovedadFirma'][1]);
                 $novedad = array_map('strtoupper', $data);
-                $result = $this->model->createNovedad($novedad, $dirc_firma);
+                $result = $this->model->createNovedad($novedad, $dirc_firma1,$dirc_firma2);
                 print_r($result);
             }
         }
@@ -317,4 +322,5 @@ class NovedadController
             return $path;
         }
     }
+
 }

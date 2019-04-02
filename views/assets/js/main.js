@@ -444,10 +444,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#btnFiltrar").click(function (e) {
-        console.log('click boton filtrar');
         e.preventDefault();
         $("#contenido").html("<tr>Buscando...</tr>");
-
         $.ajax({
             type: "POST",
             url: "index.php?c=novedad&a=consultaFiltroNovedad",
@@ -456,17 +454,5 @@ $(document).ready(function () {
                 $('#contenido').html(data);
             }
         });
-        // .done(function (response) {
-        //     if (response.success) {
-        //         console.log(response);
-        //         $("#datatable").html(response);
-        //     } else {
-        //         $("#datatable").html('No ha habido suerte:');
-        //     }
-        // })
-        // .fail(function (jqXHR, textStatus, errorThrown) {
-        //     $("#datatable").html("Algo ha fallado: " + textStatus);
-        // });
     });
-
 });

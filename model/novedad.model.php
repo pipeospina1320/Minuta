@@ -16,7 +16,7 @@ class NovedadModel
     }
 
     // Funcion para crear una novedad
-    public function createNovedades($novedad, $dirc_file, $new_nom_archivo, $dirc_firma)
+    public function createNovedades($novedad, $dirc_file, $new_nom_archivo, $dirc_firma1, $dirc_firma2)
     {
         try {
             session_start();
@@ -25,9 +25,9 @@ class NovedadModel
             $conver_fecha = date("Y-m-d H:i:s", strtotime($novedad[5])); //Configuro el formato de hora
             $conver_fechareal = date("Y-m-d H:i:s", strtotime($novedad[6])); //Configuro el formato de hora
             $foto = 1;
-            $sql = "INSERT INTO novedad (clien_id, sed_id, servi_id, nove_turno , nove_novedad, nove_fecha, nove_fechareal, usua_id, tn_id, nove_file, nove_nomarchivo, nove_foto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO novedad (clien_id, sed_id, servi_id, nove_turno , nove_novedad, nove_fecha, nove_fechareal, usua_id, tn_id, nove_file, nove_nomarchivo, nove_foto,firma1_file,firma2_file) VALUES (?,?,2,?,?,?,?,?,?,?,?,?,?,?)";
             $query = $this->pdo->prepare($sql);
-            $save = $query->execute(array($idcliente, $novedad[0], $novedad[1], $novedad[2], $novedad[4], $conver_fecha, $conver_fechareal, $idsession, $novedad[3], $dirc_file, $new_nom_archivo, $foto));
+            $save = $query->execute(array($idcliente, $novedad[0], $novedad[1], $novedad[2], $novedad[4], $conver_fecha, $conver_fechareal, $idsession, $novedad[3], $dirc_file, $new_nom_archivo, $foto, $dirc_firma1, $dirc_firma2));
             // var_dump($save);
             if ($save == 1) {
                 return true;
@@ -41,7 +41,7 @@ class NovedadModel
 
 
     // Funcion para crear una novedad
-    public function createNovedad($novedad, $dirc_firma)
+    public function createNovedad($novedad, $dirc_firma1, $dirc_firma2)
     {
         try {
             session_start();
@@ -49,9 +49,9 @@ class NovedadModel
             $idcliente = $_SESSION["idcliente"];
             $conver_fecha = date("Y-m-d H:i:s", strtotime($novedad[5])); //Configuro el formato de hora
             $conver_fechareal = date("Y-m-d H:i:s", strtotime($novedad[6])); //Configuro el formato de hora
-            $sql = "INSERT INTO novedad (clien_id, sed_id, servi_id, nove_turno , nove_novedad, nove_fecha, nove_fechareal, usua_id, tn_id,firma_file) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO novedad (clien_id, sed_id, servi_id, nove_turno , nove_novedad, nove_fecha, nove_fechareal, usua_id, tn_id,firma1_file,firma2_file) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             $query = $this->pdo->prepare($sql);
-            $save = $query->execute(array($idcliente, $novedad[0], $novedad[1], $novedad[2], $novedad[4], $conver_fecha, $conver_fechareal, $idsession, $novedad[3], $dirc_firma));
+            $save = $query->execute(array($idcliente, $novedad[0], $novedad[1], $novedad[2], $novedad[4], $conver_fecha, $conver_fechareal, $idsession, $novedad[3], $dirc_firma1, $dirc_firma2));
             // var_dump($save);
             if ($save == 1) {
                 return true;

@@ -1,4 +1,4 @@
-  <?php
+<?php
 require_once 'model/conn.model.php';
 
 class InstruccionModel
