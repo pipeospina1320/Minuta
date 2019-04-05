@@ -33,6 +33,8 @@ CREATE TABLE `novedad` (
   `nove_fecha` datetime NOT NULL,
   `nove_fechareal` datetime NOT NULL,
   `usua_id` int(11) NOT NULL,
+  `firma1_file` text COLLATE utf8_spanish_ci,
+  `firma2_file` text COLLATE utf8_spanish_ci,
   PRIMARY KEY (`nove_id`),
   KEY `novedad_ibfk_1` (`usua_id`),
   KEY `novedad_ibfk_2` (`servi_id`),
