@@ -51,6 +51,17 @@
                                         class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="textarea">Sede:</label>
+                    <div class='col-sm-4 col-xs-12'>
+                        <select class="select2_single form-control" tabindex="-1" name="frmFiltroNovedad[]"
+                                id="frmnsede" required="required">
+                            <option value=""></option>
+                            <?php
+                            $selectiponovedad = new NovedadController();
+                            $selectiponovedad->selctSedes();
+                            ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right">

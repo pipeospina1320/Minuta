@@ -57,7 +57,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" name="frmnovedad[]" id="frmnovedadturno" required="required">
                             <option>DIURNO</option>
-                            <option>NOCTUNO</option>
+                            <option>NOCTURNO</option>
                         </select>
                     </div>
                 </div>

@@ -82,7 +82,7 @@ class NovedadController
                 $dirc_firma1 = $this->uploadImgBase64($_POST['filenovedadFirma'][0]);
                 $dirc_firma2 = $this->uploadImgBase64($_POST['filenovedadFirma'][1]);
                 $novedad = array_map('strtoupper', $data);
-                $result = $this->model->createNovedad($novedad, $dirc_firma1,$dirc_firma2);
+                $result = $this->model->createNovedad($novedad, $dirc_firma1, $dirc_firma2);
                 print_r($result);
             }
         }
@@ -186,8 +186,9 @@ class NovedadController
             $fechaInicio = $_POST['frmFiltroNovedad'][0] != "" ? $_POST['frmFiltroNovedad'][0] . " 00:00:00" : "";
             $tipoNovedad = $_POST['frmFiltroNovedad'][1];
             $fechaFin = $_POST['frmFiltroNovedad'][2] != "" ? $_POST['frmFiltroNovedad'][2] . " 23:59:00" : "";
+            $sede = $_POST['frmFiltroNovedad'][3];
         }
-        $const = $this->model->consultFiltroNovedad($fechaInicio, $fechaFin, $tipoNovedad);
+        $const = $this->model->consultFiltroNovedad($fechaInicio, $fechaFin, $tipoNovedad, $sede);
         if ($const != "") {
             foreach ($const as $row => $item) {
                 echo '<tr role="row">
