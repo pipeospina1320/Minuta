@@ -183,7 +183,7 @@
                 </li>
                 <li><a><i class="fa fa-edit"></i> Consulta <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="ConsultaNovedades-Total">Consulta Minuta</a></li>
+                    <li><a href="ConsultaNovedades">Consulta Minuta</a></li>
                     <li><a href="ConsultaDotacion-Total">Consulta Entrega/Recibida</a></li>
                     <li><a href="ConsultaProtocolos">Consulta Protocolos</a></li>
                     <li><a href="ConsultaConsignas">Consulta Consignas</a></li>
@@ -237,7 +237,7 @@
               </li>
               <li><a><i class="fa fa-edit"></i> Consulta <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="ConsultaNovedades-Total">Consulta Minuta</a></li>
+                  <li><a href="ConsultaNovedades">Consulta Minuta</a></li>
                   <li><a href="ConsultaDotacion-Total">Consulta Entrega/Recibida</a></li>
                   <li><a href="ConsultaProtocolos">Consulta Protocolos</a></li>
                   <li><a href="ConsultaConsignas">Consulta Consignas</a></li>
