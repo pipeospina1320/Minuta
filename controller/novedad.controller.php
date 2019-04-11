@@ -68,8 +68,8 @@ class NovedadController
                     $data = $_POST["frmnovedad"];
                     $novedad = array_map('strtoupper', $data);
                     $strNombreArchivos = implode(",", $array_nom_archivos);
-                    $dirc_firma1 = $this->uploadImgBase64($_POST['filenovedadFirma'][0]);
-                    $dirc_firma2 = $this->uploadImgBase64($_POST['filenovedadFirma'][1]);
+                    $dirc_firma1 = $this->uploadImgBase64($_POST['filenovedadFirma'][0], 1);
+                    $dirc_firma2 = $this->uploadImgBase64($_POST['filenovedadFirma'][1], 2);
                     $strDirectorioArchivos = implode(",", $dirc_file);
                     $result = $this->model->createNovedades($novedad, $strDirectorioArchivos, $strNombreArchivos, $dirc_firma1, $dirc_firma2);
                     print_r($result);
@@ -79,8 +79,8 @@ class NovedadController
             } else {
                 $data = $_POST["frmnovedad"];
                 // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png)
-                $dirc_firma1 = $this->uploadImgBase64($_POST['filenovedadFirma'][0]);
-                $dirc_firma2 = $this->uploadImgBase64($_POST['filenovedadFirma'][1]);
+                $dirc_firma1 = $this->uploadImgBase64($_POST['filenovedadFirma'][0], 1);
+                $dirc_firma2 = $this->uploadImgBase64($_POST['filenovedadFirma'][1], 2);
                 $novedad = array_map('strtoupper', $data);
                 $result = $this->model->createNovedad($novedad, $dirc_firma1, $dirc_firma2);
                 print_r($result);
@@ -178,10 +178,11 @@ class NovedadController
     //Funcion para consultar tabla de novedades
     public function consultaFiltroNovedad()
     {
-        session_start();
+//
         $fechaInicio = "";
         $fechaFin = "";
         $tipoNovedad = "";
+        $sede = "";
         if (isset($_POST['frmFiltroNovedad'])) {
             $fechaInicio = $_POST['frmFiltroNovedad'][0] != "" ? $_POST['frmFiltroNovedad'][0] . " 00:00:00" : "";
             $tipoNovedad = $_POST['frmFiltroNovedad'][1];
@@ -312,11 +313,11 @@ class NovedadController
         }
     }
 
-    private function uploadImgBase64($base64)
+    private function uploadImgBase64($base64, $img)
     {
         $datosBase64 = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
 
-        $path = "views/assets/images/novedad/" . date("dmYgis") . 'firma' . '.png';
+        $path = "views/assets/images/novedad/" . date("dmYgis") . 'firma' . $img . '.png';
         if (!file_put_contents($path, $datosBase64)) {
             return false;
         } else {
