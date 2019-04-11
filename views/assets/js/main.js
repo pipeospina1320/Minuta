@@ -415,6 +415,22 @@ $(document).ready(function () {
     });
 
 
+
+    $("#btnFiltrar").click(function (e) {
+        e.preventDefault();
+        $("#contenido").html("<tr>Buscando...</tr>");
+        $.ajax({
+            type: "POST",
+            url: "index.php?c=novedad&a=consultaFiltroNovedad",
+            data: $("#frmFiltroNovedad").serialize(),
+            success: function (data) {
+                $('#contenido').html(data);
+            }
+        });
+    });
+
+
+
 });
 
 
@@ -442,17 +458,3 @@ $(document).ready(function () {
 // }
 
 
-$(document).ready(function () {
-    $("#btnFiltrar").click(function (e) {
-        e.preventDefault();
-        $("#contenido").html("<tr>Buscando...</tr>");
-        $.ajax({
-            type: "POST",
-            url: "index.php?c=novedad&a=consultaFiltroNovedad",
-            data: $("#frmFiltroNovedad").serialize(),
-            success: function (data) {
-                $('#contenido').html(data);
-            }
-        });
-    });
-});

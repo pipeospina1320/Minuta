@@ -181,9 +181,12 @@ class NovedadModel
     }
 
     // Funcion para consultar todas las novedades
-    public function consultFiltroNovedad($fechaInicio = "", $fechaFin = "", $tn_novedad = "",$sede)
+    public function consultFiltroNovedad($fechaInicio = "", $fechaFin = "", $tn_novedad = "", $sede)
     {
         try {
+            if (!isset($_SESSION)) {
+                session_start();
+            }
             $parametros[] = $_SESSION["idcliente"];
             $sql = "SELECT c.clien_nombre,  s.sed_nombre, e.servi_nombre,  n.nove_turno, t.tn_nombre, n.nove_novedad,  DATE_FORMAT(n.nove_fecha, '%Y-%m-%d %H:%i') AS nove_fechas, DATE_FORMAT(n.nove_fechareal, '%Y-%m-%d %H:%i') AS nove_fechasreal,  u.usua_nombre1, u.usua_nombre2, u.usua_apellido1, u.usua_apellido2,
               n.nove_foto, n.nove_id, n.nove_estado
