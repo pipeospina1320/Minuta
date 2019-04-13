@@ -1,5 +1,6 @@
 <?php
 require_once 'model/novedad.model.php';
+require_once 'libs/mpdf-6.1.4/mpdf.php';
 
 class NovedadController
 {
@@ -212,6 +213,9 @@ class NovedadController
                 } elseif ($item["nove_estado"] == 0) {
                     echo '<td style="text-align:center;"><button type="button" class="btn btn-default btn-sm" ><i class="fa fa-eye-slash fa-lg"></i></button></td>';
                 }
+                echo '<td>
+                        <a target="_blank" href="Novedad-Acta-' . $item["nove_id"] . '" class="btn btn-warning btn-xs"><i class="fa fa-file"></i> Generar Acta </a>
+                       </td>';
             }
             echo '</tr>';
         }
@@ -323,6 +327,128 @@ class NovedadController
         } else {
             return $path;
         }
+    }
+
+    public function actaMinuta()
+    {
+        $id_acta = $_REQUEST['Acta'];
+        $novedad = $this->model->consultaNovedad($id_acta);
+        $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
+        $cliente = $novedad[0]['clien_nombre'];
+        $rutaFirma = $novedad[0]['firma1_file'];
+        $cargo = $novedad[0]['carg_nombre'];
+        $sede = $novedad[0]['sed_nombre'];
+        $servicio = $novedad[0]['servi_nombre'];
+        $desNovedad = $novedad[0]['nove_novedad'];
+        $fechaActual = new DateTime('now');
+        $dia = $fechaActual->format('d');
+        $mes = $this->convertirMesLetras($fechaActual->format('m'));
+        $anio = $fechaActual->format('Y');
+
+        $fechaNovedad = $novedad[0]['nove_fecha'];
+        $fechaNovedad = preg_split("/[\s.-]+/", $fechaNovedad);
+
+        $html = '
+        <div id="contenedor">
+            <div align="right" id="logo" style="margin: auto;width: 650px;height: 100px">
+            <img align="right" src="views/assets/images/logo_image.png" alt="logo" width="225px" height="80px">
+            </div>
+            
+            <div id="fecha" style="margin: auto;width: 650px;height: 100px">
+            <p>Medellin, ' . $dia . ' de ' . $mes . ' del ' . $anio . '</p>
+            </div>
+            
+            <div id="destinatario" style="margin: auto;width: 650px;height: 100px">
+            <p>Señores<br>
+            ' . $cliente . '<br>
+            ' . $sede . '</p>
+            </div>
+            
+            <div id="asunto" style="margin: auto;width: 650px;height: 100px">
+            <p align="center">ACTA EVENTO MINUTA<br>
+            ' . $fechaNovedad[2] . ' ' . $this->convertirMesLetras($fechaNovedad[1]) . ' ' . $fechaNovedad[0] . ' ' . $fechaNovedad[3] . '</p>
+            </div>
+            
+            <div id="cuerpo" style="margin: auto;width: 600px;height: 400px">
+            <p>' . $servicio . '</p>
+            <p></p>
+            <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
+            </div>
+            
+            <div id="firma" style="margin: auto;width: 650px;height: 100px">
+            <img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
+            <p>_______________________________________________<br>
+            ' . $nombreUsuario . '<br>
+            ' . $cargo . '<br>
+            COVITEC LTDA
+            </p>
+            </div>
+            
+            
+        </div>
+        ';
+        $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('actaMinuta.pdf', 'D');
+
+        exit;
+    }
+
+    private function convertirMesLetras($mes)
+    {
+        $mesLetras = "";
+        switch ($mes) {
+
+            case "01":
+                $mesLetras = "Enero";
+                break;
+
+            case "02":
+                $mesLetras = "Febrero";
+                break;
+
+            case "03":
+                $mesLetras = "Marzo";
+                break;
+
+            case "04":
+                $mesLetras = "Abril";
+                break;
+
+            case "05":
+                $mesLetras = "Mayo";
+                break;
+
+            case "06":
+                $mesLetras = "Junio";
+                break;
+
+            case "07":
+                $mesLetras = "Julio";
+                break;
+
+            case "08":
+                $mesLetras = "Agosto";
+                break;
+
+            case "09":
+                $mesLetras = "Septiembre";
+                break;
+
+            case "10":
+                $mesLetras = "Octubre";
+                break;
+
+            case "11":
+                $mesLetras = "Noviembre";
+                break;
+
+            case "12":
+                $mesLetras = "Diciembre";
+                break;
+
+        }
+        return $mesLetras;
     }
 
 }

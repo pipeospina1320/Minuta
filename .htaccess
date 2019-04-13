@@ -1,6 +1,6 @@
 # Impedir que se pueda ver el listado de contenidos de un directorio
 Options All -Indexes
-
+#
 AuthType Basic
 AuthName "Autentificar"
 AuthUserFile C:\xampp\htdocs\.htpasswd
@@ -61,6 +61,8 @@ RewriteRule ^VerUsuarios$                   index.php?c=home&a=wiewsUserNormal
 RewriteRule ^CrearClienteSedes$             index.php?c=home&a=wiewsClienteSede
 RewriteRule ^MiPerfil$                      index.php?c=home&a=wiewsProfile
 RewriteRule ^CrearCargo$                    index.php?c=home&a=wiewsCharge
+#Acciones Novedad
+RewriteRule ^Novedad-Acta-(\w+)$             index.php?c=novedad&a=actaMinuta&Acta=$1
 #Acciones Protocolo
 RewriteRule ^Protocolo-Editar-(\w+)$        index.php?c=protocolo&a=wiewseditaProto&Editar=$1
 RewriteRule ^Protocolo-Reader-(\w+)$        index.php?c=protocolo&a=readerArchivoProto&Reader=$1

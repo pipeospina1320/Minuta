@@ -287,6 +287,26 @@ class NovedadModel
         }
     }
 
+    public function consultaNovedad($data)
+    {
+        try {
+            $sql = "SELECT n.* , c.*, s.*, se.*, u.*, car.*
+                FROM novedad AS n 
+                JOIN cliente c ON n.clien_id = c.clien_id
+                JOIN sede s ON n.sed_id = s.sed_id
+                JOIN servicio se ON n.servi_id = se.servi_id
+                JOIN usuario u ON n.usua_id = u.usua_id
+                JOIN cargo car ON u.carg_id = car.carg_id
+                AND n.nove_id =  ?";
+            $query = $this->pdo->prepare($sql);
+            $const = $query->execute(array($data));
+            $const = $query->fetchALL(PDO::FETCH_BOTH);
+            return $const;
+        } catch (\Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     // Funcion para crear una observación
     public function createObservaciones($novedad)
     {

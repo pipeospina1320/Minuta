@@ -92,6 +92,7 @@
                     <th>Reporta Novedad</th>
                     <th>Evidencia</th>
                     <th>Estado</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody id="contenido">
