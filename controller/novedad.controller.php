@@ -175,6 +175,68 @@ class NovedadController
         }
     }
 
+    public function pdfFiltroNovedad()
+    {
+
+        $fechaInicio = "";
+        $fechaFin = "";
+        $tipoNovedad = "";
+        $sede = "";
+        if (isset($_POST['frmFiltroNovedad'])) {
+            $fechaInicio = $_POST['frmFiltroNovedad'][0] != "" ? $_POST['frmFiltroNovedad'][0] . " 00:00:00" : "";
+            $tipoNovedad = $_POST['frmFiltroNovedad'][1];
+            $fechaFin = $_POST['frmFiltroNovedad'][2] != "" ? $_POST['frmFiltroNovedad'][2] . " 23:59:00" : "";
+            $sede = $_POST['frmFiltroNovedad'][3];
+        }
+        $const = $this->model->consultFiltroNovedad($fechaInicio, $fechaFin, $tipoNovedad, $sede);
+        $html = '
+            <div align="right" id="logo" style="margin: auto;width: 650px;height: 100px">
+                <img align="right" src="views/assets/images/logo_image.png" alt="logo" width="225px" height="80px">
+            </div>
+          <table border=1 style="border-collapse: collapse;height:auto;">
+            <thead>
+                    <tr>
+                        <th style="width:40px">Dia</th>
+                        <th style="width:40px">Mes</th>
+                        <th style="width:60px">Año</th>
+                        <th style="width:100px">Hora</th>
+                        <th style="width:150px">Asunto</th>
+                        <th style="width:300px">Anotaciones</th>       
+                    </tr>
+            </thead>
+            <tbody>';
+        foreach ($const as $row => $minuta) {
+            $id_acta = $minuta['Acta'];
+            $nombreUsuario = $minuta['usua_nombre1'] . " " . $minuta['usua_nombre2'] . " " . $minuta['usua_apellido1'] . " " . $minuta['usua_apellido2'];
+            $tNovedad = $minuta['tn_nombre'];
+            $desNovedad = $minuta['nove_novedad'];
+            $fechaNovedad = $minuta['nove_fechas'];
+            $fechaNovedad = preg_split("/[\s.-]+/", $fechaNovedad);
+            $html .= '
+            <tr role="row">
+                <td style="width:40px">' . $fechaNovedad[2] . '</td>
+                <td style="width:40px">' . $fechaNovedad[1] . '</td>
+                <td style="width:60px">' . $fechaNovedad[0] . '</td>
+                <td style="width:100px">' . $fechaNovedad[3] . '</td>
+                <td style="width:150px">' . $tNovedad . '</td>
+                <td style="width:300px">' . $desNovedad . '</td>
+            </tr>
+        ';
+        }
+        $html .= '
+        </tbody>
+    </table>';
+
+        $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
+        $css = file_get_contents('views/assets/datatables.net-bs/css/dataTables.bootstrap.min.css');
+        $mpdf->writeHTML($css, 1);
+        $mpdf->WriteHTML($html);
+
+        $mpdf->Output('ResumenNovedades.pdf', 'D');
+
+        exit;
+
+    }
 
     //Funcion para consultar tabla de novedades
     public function consultaFiltroNovedad()
@@ -331,67 +393,69 @@ class NovedadController
 
     public function actaMinuta()
     {
-        $id_acta = $_REQUEST['Acta'];
-        $novedad = $this->model->consultaNovedad($id_acta);
-        $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
-        $cliente = $novedad[0]['clien_nombre'];
-        $rutaFirma = $novedad[0]['firma1_file'];
-        $cargo = $novedad[0]['carg_nombre'];
-        $sede = $novedad[0]['sed_nombre'];
-        $servicio = $novedad[0]['servi_nombre'];
-        $desNovedad = $novedad[0]['nove_novedad'];
-        $fechaActual = new DateTime('now');
-        $dia = $fechaActual->format('d');
-        $mes = $this->convertirMesLetras($fechaActual->format('m'));
-        $anio = $fechaActual->format('Y');
+//        $id_acta = $_REQUEST['Acta'];
+//        $novedad = $this->model->consultaNovedad($id_acta);
+//        $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
+//        $cliente = $novedad[0]['clien_nombre'];
+//        $rutaFirma = $novedad[0]['firma1_file'];
+//        $cargo = $novedad[0]['carg_nombre'];
+//        $sede = $novedad[0]['sed_nombre'];
+//        $servicio = $novedad[0]['servi_nombre'];
+//        $desNovedad = $novedad[0]['nove_novedad'];
+//        $fechaActual = new DateTime('now');
+//        $dia = $fechaActual->format('d');
+//        $mes = $this->convertirMesLetras($fechaActual->format('m'));
+//        $anio = $fechaActual->format('Y');
+//
+//        $fechaNovedad = $novedad[0]['nove_fecha'];
+//        $fechaNovedad = preg_split("/[\s.-]+/", $fechaNovedad);
+//
+//        $html = '
+//        <div id="contenedor">
+//            <div align="right" id="logo" style="margin: auto;width: 650px;height: 100px">
+//            <img align="right" src="views/assets/images/logo_image.png" alt="logo" width="225px" height="80px">
+//            </div>
+//
+//            <div id="fecha" style="margin: auto;width: 650px;height: 100px">
+//            <p>Medellin, ' . $dia . ' de ' . $mes . ' del ' . $anio . '</p>
+//            </div>
+//
+//            <div id="destinatario" style="margin: auto;width: 650px;height: 100px">
+//            <p>Señores<br>
+//            <b>' . $cliente . '</b><br>
+//            ' . $sede . '</p>
+//            </div>
+//
+//            <div id="asunto" style="margin: auto;width: 650px;height: 100px">
+//           <p align="center"><b>ACTA EVENTO MINUTA</b><br>
+//            <b>' . $fechaNovedad[2] . ' ' . $this->convertirMesLetras($fechaNovedad[1]) . ' ' . $fechaNovedad[0] . ' ' . $fechaNovedad[3] . '</b>
+//            </div>
+//
+//            <div id="cuerpo" style="margin: auto;width: 600px;height: 400px">
+//            <p>' . $servicio . '</p>
+//            <p></p>
+//            <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
+//            </div>
+//
+//            <div id="firma" style="margin: auto;width: 650px;height: 100px">
+//            <img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
+//            <p><b>_______________________________________________</b><br>
+//            <b>' . $nombreUsuario . '</b><br>
+//            ' . $cargo . '<br>
+//            COVITEC LTDA
+//            </p>
+//            </div>
+//
+//
+//        </div>
+//        ';
+//        $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
+//        $mpdf->WriteHTML($html);
+//        $mpdf->Output('actaMinuta.pdf', 'D');
+//
+//        exit;
 
-        $fechaNovedad = $novedad[0]['nove_fecha'];
-        $fechaNovedad = preg_split("/[\s.-]+/", $fechaNovedad);
 
-        $html = '
-        <div id="contenedor">
-            <div align="right" id="logo" style="margin: auto;width: 650px;height: 100px">
-            <img align="right" src="views/assets/images/logo_image.png" alt="logo" width="225px" height="80px">
-            </div>
-            
-            <div id="fecha" style="margin: auto;width: 650px;height: 100px">
-            <p>Medellin, ' . $dia . ' de ' . $mes . ' del ' . $anio . '</p>
-            </div>
-            
-            <div id="destinatario" style="margin: auto;width: 650px;height: 100px">
-            <p>Señores<br>
-            ' . $cliente . '<br>
-            ' . $sede . '</p>
-            </div>
-            
-            <div id="asunto" style="margin: auto;width: 650px;height: 100px">
-            <p align="center">ACTA EVENTO MINUTA<br>
-            ' . $fechaNovedad[2] . ' ' . $this->convertirMesLetras($fechaNovedad[1]) . ' ' . $fechaNovedad[0] . ' ' . $fechaNovedad[3] . '</p>
-            </div>
-            
-            <div id="cuerpo" style="margin: auto;width: 600px;height: 400px">
-            <p>' . $servicio . '</p>
-            <p></p>
-            <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
-            </div>
-            
-            <div id="firma" style="margin: auto;width: 650px;height: 100px">
-            <img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
-            <p>_______________________________________________<br>
-            ' . $nombreUsuario . '<br>
-            ' . $cargo . '<br>
-            COVITEC LTDA
-            </p>
-            </div>
-            
-            
-        </div>
-        ';
-        $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
-        $mpdf->WriteHTML($html);
-        $mpdf->Output('actaMinuta.pdf', 'D');
-
-        exit;
     }
 
     private function convertirMesLetras($mes)

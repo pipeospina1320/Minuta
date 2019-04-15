@@ -64,7 +64,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+
+
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right">
+
+                        <a target="_blank" href="Novedad-ResumenActa?frmFiltroNovedadFechaFin"
+                           class="btn btn-warning btn-xs"><i class="fa fa-file"></i> Generar Acta </a>
+                        <button type="button" id="btnMinutaPdf" class="btn btn-default">Resumen minuta PDF</button>
                         <button type="button" id="btnFiltrar" class="btn btn-primary">Consultar</button>
                     </div>
                 </div>

@@ -415,7 +415,6 @@ $(document).ready(function () {
     });
 
 
-
     $("#btnFiltrar").click(function (e) {
         e.preventDefault();
         $("#contenido").html("<tr>Buscando...</tr>");
@@ -430,6 +429,17 @@ $(document).ready(function () {
     });
 
 
+    $("#btnMinutaPdf").click(function () {
+        // e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "index.php?c=novedad&a=pdfFiltroNovedad",
+            data: $("#frmFiltroNovedad").serialize(),
+            success: function () {
+                // $('#contenido').html(data);
+            }
+        });
+    });
 
 });
 
