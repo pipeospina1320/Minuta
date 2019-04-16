@@ -68,9 +68,9 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right">
 
-                        <a target="_blank" href="Novedad-ResumenActa?frmFiltroNovedadFechaFin"
-                           class="btn btn-warning btn-xs"><i class="fa fa-file"></i> Generar Acta </a>
-                        <button type="button" id="btnMinutaPdf" class="btn btn-default">Resumen minuta PDF</button>
+                        <a target="_blank" href="Novedad-ResumenActa?filtro=frmFiltroNovedad[]"
+                           class="btn btn-warning"><i class="fa fa-file"></i>Resumen minuta PDF</a>
+                        <!--                        <button type="button" id="btnMinutaPdf" class="btn btn-default">Resumen minuta PDF</button>-->
                         <button type="button" id="btnFiltrar" class="btn btn-primary">Consultar</button>
                     </div>
                 </div>

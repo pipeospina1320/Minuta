@@ -4,7 +4,7 @@
 	private static $db_host = "localhost";
 	private static $db_name = "covitecltda";
 	private static $db_user = "root";
-	private static $db_pass = "";
+	private static $db_pass = "123456";
 
 	private static $cont    = null;
 

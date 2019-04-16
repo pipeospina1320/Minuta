@@ -182,11 +182,14 @@ class NovedadController
         $fechaFin = "";
         $tipoNovedad = "";
         $sede = "";
-        if (isset($_POST['frmFiltroNovedad'])) {
-            $fechaInicio = $_POST['frmFiltroNovedad'][0] != "" ? $_POST['frmFiltroNovedad'][0] . " 00:00:00" : "";
-            $tipoNovedad = $_POST['frmFiltroNovedad'][1];
-            $fechaFin = $_POST['frmFiltroNovedad'][2] != "" ? $_POST['frmFiltroNovedad'][2] . " 23:59:00" : "";
-            $sede = $_POST['frmFiltroNovedad'][3];
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if (isset($_SESSION)) {
+            $fechaInicio = $_SESSION['fechaInicio'];
+            $fechaFin = $_SESSION['fechaFin'];
+            $sede = $_SESSION['sede'];
+            $tipoNovedad = $_SESSION['tipoNovedad'];
         }
         $const = $this->model->consultFiltroNovedad($fechaInicio, $fechaFin, $tipoNovedad, $sede);
         $html = '
@@ -233,8 +236,7 @@ class NovedadController
         $mpdf->WriteHTML($html);
 
         $mpdf->Output('ResumenNovedades.pdf', 'D');
-
-        exit;
+        return true;
 
     }
 
@@ -247,10 +249,30 @@ class NovedadController
         $tipoNovedad = "";
         $sede = "";
         if (isset($_POST['frmFiltroNovedad'])) {
+
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+//            if (!isset($_SESSION['fechaDesde'])) {
             $fechaInicio = $_POST['frmFiltroNovedad'][0] != "" ? $_POST['frmFiltroNovedad'][0] . " 00:00:00" : "";
-            $tipoNovedad = $_POST['frmFiltroNovedad'][1];
+            $_SESSION['fechaInicio'] = $fechaInicio;
+//            }
+
+//            if (!isset($_SESSION['fechaHasta'])) {
             $fechaFin = $_POST['frmFiltroNovedad'][2] != "" ? $_POST['frmFiltroNovedad'][2] . " 23:59:00" : "";
+            $_SESSION['fechaFin'] = $fechaFin;
+//            }
+
+//            if (!isset($_SESSION['sede'])) {
             $sede = $_POST['frmFiltroNovedad'][3];
+            $_SESSION['sede'] = $sede;
+//            }
+
+//            if (!isset($_SESSION['tipoNovedad'])) {
+            $tipoNovedad = $_POST['frmFiltroNovedad'][1];
+            $_SESSION['tipoNovedad'] = $tipoNovedad;
+//            }
+
         }
         $const = $this->model->consultFiltroNovedad($fechaInicio, $fechaFin, $tipoNovedad, $sede);
         if ($const != "") {
@@ -393,67 +415,67 @@ class NovedadController
 
     public function actaMinuta()
     {
-//        $id_acta = $_REQUEST['Acta'];
-//        $novedad = $this->model->consultaNovedad($id_acta);
-//        $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
-//        $cliente = $novedad[0]['clien_nombre'];
-//        $rutaFirma = $novedad[0]['firma1_file'];
-//        $cargo = $novedad[0]['carg_nombre'];
-//        $sede = $novedad[0]['sed_nombre'];
-//        $servicio = $novedad[0]['servi_nombre'];
-//        $desNovedad = $novedad[0]['nove_novedad'];
-//        $fechaActual = new DateTime('now');
-//        $dia = $fechaActual->format('d');
-//        $mes = $this->convertirMesLetras($fechaActual->format('m'));
-//        $anio = $fechaActual->format('Y');
-//
-//        $fechaNovedad = $novedad[0]['nove_fecha'];
-//        $fechaNovedad = preg_split("/[\s.-]+/", $fechaNovedad);
-//
-//        $html = '
-//        <div id="contenedor">
-//            <div align="right" id="logo" style="margin: auto;width: 650px;height: 100px">
-//            <img align="right" src="views/assets/images/logo_image.png" alt="logo" width="225px" height="80px">
-//            </div>
-//
-//            <div id="fecha" style="margin: auto;width: 650px;height: 100px">
-//            <p>Medellin, ' . $dia . ' de ' . $mes . ' del ' . $anio . '</p>
-//            </div>
-//
-//            <div id="destinatario" style="margin: auto;width: 650px;height: 100px">
-//            <p>Señores<br>
-//            <b>' . $cliente . '</b><br>
-//            ' . $sede . '</p>
-//            </div>
-//
-//            <div id="asunto" style="margin: auto;width: 650px;height: 100px">
-//           <p align="center"><b>ACTA EVENTO MINUTA</b><br>
-//            <b>' . $fechaNovedad[2] . ' ' . $this->convertirMesLetras($fechaNovedad[1]) . ' ' . $fechaNovedad[0] . ' ' . $fechaNovedad[3] . '</b>
-//            </div>
-//
-//            <div id="cuerpo" style="margin: auto;width: 600px;height: 400px">
-//            <p>' . $servicio . '</p>
-//            <p></p>
-//            <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
-//            </div>
-//
-//            <div id="firma" style="margin: auto;width: 650px;height: 100px">
-//            <img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
-//            <p><b>_______________________________________________</b><br>
-//            <b>' . $nombreUsuario . '</b><br>
-//            ' . $cargo . '<br>
-//            COVITEC LTDA
-//            </p>
-//            </div>
-//
-//
-//        </div>
-//        ';
-//        $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
-//        $mpdf->WriteHTML($html);
-//        $mpdf->Output('actaMinuta.pdf', 'D');
-//
-//        exit;
+        $id_acta = $_REQUEST['Acta'];
+        $novedad = $this->model->consultaNovedad($id_acta);
+        $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
+        $cliente = $novedad[0]['clien_nombre'];
+        $rutaFirma = $novedad[0]['firma1_file'];
+        $cargo = $novedad[0]['carg_nombre'];
+        $sede = $novedad[0]['sed_nombre'];
+        $servicio = $novedad[0]['servi_nombre'];
+        $desNovedad = $novedad[0]['nove_novedad'];
+        $fechaActual = new DateTime('now');
+        $dia = $fechaActual->format('d');
+        $mes = $this->convertirMesLetras($fechaActual->format('m'));
+        $anio = $fechaActual->format('Y');
+
+        $fechaNovedad = $novedad[0]['nove_fecha'];
+        $fechaNovedad = preg_split("/[\s.-]+/", $fechaNovedad);
+
+        $html = '
+        <div id="contenedor">
+            <div align="right" id="logo" style="margin: auto;width: 650px;height: 100px">
+            <img align="right" src="views/assets/images/logo_image.png" alt="logo" width="225px" height="80px">
+            </div>
+
+            <div id="fecha" style="margin: auto;width: 650px;height: 100px">
+            <p>Medellin, ' . $dia . ' de ' . $mes . ' del ' . $anio . '</p>
+            </div>
+
+            <div id="destinatario" style="margin: auto;width: 650px;height: 100px">
+            <p>Señores<br>
+            <b>' . $cliente . '</b><br>
+            ' . $sede . '</p>
+            </div>
+
+            <div id="asunto" style="margin: auto;width: 650px;height: 100px">
+           <p align="center"><b>ACTA EVENTO MINUTA</b><br>
+            <b>' . $fechaNovedad[2] . ' ' . $this->convertirMesLetras($fechaNovedad[1]) . ' ' . $fechaNovedad[0] . ' ' . $fechaNovedad[3] . '</b>
+            </div>
+
+            <div id="cuerpo" style="margin: auto;width: 600px;height: 400px">
+            <p>' . $servicio . '</p>
+            <p></p>
+            <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
+            </div>
+
+            <div id="firma" style="margin: auto;width: 650px;height: 100px">
+            <img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
+            <p><b>_______________________________________________</b><br>
+            <b>' . $nombreUsuario . '</b><br>
+            ' . $cargo . '<br>
+            COVITEC LTDA
+            </p>
+            </div>
+
+
+        </div>
+        ';
+        $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('actaMinuta.pdf', 'D');
+
+        exit;
 
 
     }
