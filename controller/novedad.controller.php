@@ -459,16 +459,24 @@ class NovedadController
             <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
             </div>
 
-            <div id="firma" style="margin: auto;width: 650px;height: 100px">
-            <img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
+            <div id="firma" style="margin: auto;width: 650px;height: 100px">';
+
+        if (!$rutaFirma) {
+            $html .= '
             <p><b>_______________________________________________</b><br>
             <b>' . $nombreUsuario . '</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
-            </p>
-            </div>
-
-
+            </p>';
+        } else {
+            $html .= '<img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
+            <p><b>_______________________________________________</b><br>
+            <b>' . $nombreUsuario . '</b><br>
+            ' . $cargo . '<br>
+            COVITEC LTDA
+            </p>';
+        }
+        $html .= '</div>
         </div>
         ';
         $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
