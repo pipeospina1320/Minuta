@@ -438,28 +438,28 @@ class NovedadController
             <img align="right" src="views/assets/images/logo_image.png" alt="logo" width="225px" height="80px">
             </div>
 
-            <div id="fecha" style="margin: auto;width: 650px;height: 100px">
+            <div id="fecha" style="width: 650px;height: 100px">
             <p>Medellin, ' . $dia . ' de ' . $mes . ' del ' . $anio . '</p>
             </div>
 
-            <div id="destinatario" style="margin: auto;width: 650px;height: 100px">
+            <div id="destinatario" style="width: 650px;height: 100px">
             <p>Señores<br>
             <b>' . $cliente . '</b><br>
             ' . $sede . '</p>
             </div>
 
-            <div id="asunto" style="margin: auto;width: 650px;height: 100px">
+            <div id="asunto" style="width: 650px;height: 100px">
            <p align="center"><b>ACTA EVENTO MINUTA</b><br>
             <b>' . $fechaNovedad[2] . ' ' . $this->convertirMesLetras($fechaNovedad[1]) . ' ' . $fechaNovedad[0] . ' ' . $fechaNovedad[3] . '</b>
             </div>
 
-            <div id="cuerpo" style="margin: auto;width: 600px;height: 400px">
+            <div id="cuerpo" style="width: 600px;height: 400px">
             <p>' . $servicio . '</p>
             <p></p>
             <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
             </div>
 
-            <div id="firma" style="margin: auto;width: 650px;height: 100px">';
+            <div id="firma" style="width: 650px;height: 100px">';
 
         if (!$rutaFirma) {
             $html .= '
