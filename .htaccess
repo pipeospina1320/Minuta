@@ -63,7 +63,8 @@ RewriteRule ^MiPerfil$                      index.php?c=home&a=wiewsProfile
 RewriteRule ^CrearCargo$                    index.php?c=home&a=wiewsCharge
 #Acciones Novedad
 RewriteRule ^Novedad-Acta-(\w+)$            index.php?c=novedad&a=actaMinuta&Acta=$1
-RewriteRule ^Novedad-ResumenActa            index.php?c=novedad&a=pdfFiltroNovedad&filtros=[]
+RewriteRule ^Novedad-ResumenActa            index.php?c=novedad&a=pdfFiltroNovedad
+RewriteRule ^Novedad-ResumenExcel           index.php?c=novedad&a=excelFiltroNovedad
 #Acciones Protocolo
 RewriteRule ^Protocolo-Editar-(\w+)$        index.php?c=protocolo&a=wiewseditaProto&Editar=$1
 RewriteRule ^Protocolo-Reader-(\w+)$        index.php?c=protocolo&a=readerArchivoProto&Reader=$1

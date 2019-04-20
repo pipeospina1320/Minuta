@@ -488,6 +488,62 @@ class NovedadController
 
     }
 
+    public function excelFiltroNovedad()
+    {
+        header('Content-type:application/xls');
+        header('Content-Disposition: attachment; filename=resumenMinuta.xls');
+        $fechaInicio = "";
+        $fechaFin = "";
+        $tipoNovedad = "";
+        $sede = "";
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if (isset($_SESSION)) {
+            $fechaInicio = $_SESSION['fechaInicio'];
+            $fechaFin = $_SESSION['fechaFin'];
+            $sede = $_SESSION['sede'];
+            $tipoNovedad = $_SESSION['tipoNovedad'];
+        }
+        $novedades = $this->model->consultFiltroNovedad($fechaInicio, $fechaFin, $tipoNovedad, $sede);
+
+        echo '
+          <table>
+            <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Fecha Novedad</th>
+                        <th>Tipo Novedad</th>
+                        <th>Novedad</th>
+                        <th>Nombre Sede</th>
+                        <th>Servicio</th>
+                        <th>Turno</th>
+                        <th>Reporta Novedad</th>
+                      
+                    </tr>
+            </thead>
+            <tbody>';
+        foreach ($novedades as $row => $minuta) {
+            echo '
+            <tr role="row">
+                <td>' . $minuta['nove_id'] . '</td>
+                <td class="sorting_1">' . $minuta["nove_fechas"] . '</td>
+                <td>' . $minuta["tn_nombre"] . '</td>
+                <td>' . $minuta["nove_novedad"] . '</td>
+                <td>' . $minuta["sed_nombre"] . '</td>
+                <td>' . $minuta["servi_nombre"] . '</td>
+                <td>' . $minuta["nove_turno"] . '</td>
+                <td>' . $minuta["usua_nombre1"] . ' ' . $minuta["usua_nombre2"] . ' ' . $minuta["usua_apellido1"] . ' ' . $minuta["usua_apellido2"] . '</td>
+                <td style="text-align:center;">
+            </tr>';
+        }
+
+        echo '</tbody>
+    </table>';
+
+    }
+
+
     private function convertirMesLetras($mes)
     {
         $mesLetras = "";
