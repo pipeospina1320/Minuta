@@ -1,6 +1,7 @@
 <?php
 require_once 'model/novedad.model.php';
 require_once 'libs/mpdf-6.1.4/mpdf.php';
+require_once 'libs/phpExcel/PHPExcel.php';
 
 class NovedadController
 {
@@ -415,6 +416,9 @@ class NovedadController
 
     public function actaMinuta()
     {
+        set_time_limit(0);
+        setlocale(LC_ALL, 'es_ES');
+        ini_set('memory_limit', '-1');
         $id_acta = $_REQUEST['Acta'];
         $novedad = $this->model->consultaNovedad($id_acta);
         $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
@@ -490,8 +494,23 @@ class NovedadController
 
     public function excelFiltroNovedad()
     {
-        header('Content-type:application/xls');
-        header('Content-Disposition: attachment; filename=resumenMinuta.xls');
+
+        set_time_limit(0);
+        setlocale(LC_ALL, 'es_ES');
+        ini_set('memory_limit', '-1');
+
+        $objPHPExcel = new PHPExcel();
+
+        // Establecer propiedades
+//        $objPHPExcel->getProperties()
+//            ->setCreator("Cattivo")
+//            ->setLastModifiedBy("Cattivo")
+//            ->setTitle("Documento Excel de Prueba")
+//            ->setSubject("Documento Excel de Prueba")
+//            ->setDescription("Demostracion sobre como crear archivos de Excel desde PHP.")
+//            ->setKeywords("Excel Office 2007 openxml php")
+//            ->setCategory("Pruebas de Excel");
+
         $fechaInicio = "";
         $fechaFin = "";
         $tipoNovedad = "";
@@ -507,40 +526,46 @@ class NovedadController
         }
         $novedades = $this->model->consultFiltroNovedad($fechaInicio, $fechaFin, $tipoNovedad, $sede);
 
-        echo '
-          <table>
-            <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Fecha Novedad</th>
-                        <th>Tipo Novedad</th>
-                        <th>Novedad</th>
-                        <th>Nombre Sede</th>
-                        <th>Servicio</th>
-                        <th>Turno</th>
-                        <th>Reporta Novedad</th>
-                      
-                    </tr>
-            </thead>
-            <tbody>';
+        // Agregar Informacion
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'id')
+            ->setCellValue('B1', 'Fecha Novedad')
+            ->setCellValue('C1', 'Tipo de novedad')
+            ->setCellValue('D1', 'Novedad')
+            ->setCellValue('E1', 'Nombre sede')
+            ->setCellValue('F1', 'Servicio')
+            ->setCellValue('G1', 'Turno')
+            ->setCellValue('H1', 'Reporte novedad');
+
+
+        $i = 2;
         foreach ($novedades as $row => $minuta) {
-            echo '
-            <tr role="row">
-                <td>' . $minuta['nove_id'] . '</td>
-                <td class="sorting_1">' . $minuta["nove_fechas"] . '</td>
-                <td>' . $minuta["tn_nombre"] . '</td>
-                <td>' . $minuta["nove_novedad"] . '</td>
-                <td>' . $minuta["sed_nombre"] . '</td>
-                <td>' . $minuta["servi_nombre"] . '</td>
-                <td>' . $minuta["nove_turno"] . '</td>
-                <td>' . $minuta["usua_nombre1"] . ' ' . $minuta["usua_nombre2"] . ' ' . $minuta["usua_apellido1"] . ' ' . $minuta["usua_apellido2"] . '</td>
-                <td style="text-align:center;">
-            </tr>';
+            // Agregar Informacion
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . $i, $minuta['nove_id'])
+                ->setCellValue('B' . $i, $minuta["nove_fechas"])
+                ->setCellValue('C' . $i, $minuta["tn_nombre"])
+                ->setCellValue('D' . $i, $minuta["nove_novedad"])
+                ->setCellValue('E' . $i, $minuta["sed_nombre"])
+                ->setCellValue('F' . $i, $minuta["servi_nombre"])
+                ->setCellValue('G' . $i, $minuta["nove_turno"])
+                ->setCellValue('H' . $i, $minuta["usua_nombre1"] . ' ' . $minuta["usua_nombre2"] . ' ' . $minuta["usua_apellido1"] . ' ' . $minuta["usua_apellido2"]);
+
+            $i++;
         }
 
-        echo '</tbody>
-    </table>';
+//        // Renombrar Hoja
+        $objPHPExcel->getActiveSheet()->setTitle('Resumen');
+//      Establecer la hoja activa, para que cuando se abra el documento se muestre primero .
+        $objPHPExcel->setActiveSheetIndex(0);
 
+// Se modifican los encabezados del HTTP para indicar que se envia un archivo de Excel.
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        ob_end_clean();
+        header('Content-type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="resumen.xlsx"');
+        $objWriter->save('php://output');
+        exit;
     }
 
 
