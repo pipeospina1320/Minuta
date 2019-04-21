@@ -17,7 +17,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            <a target="_blank" href="Novedad-ResumenExcel"
+            <a target="_blank" href="Notificacion-Excel"
                class="btn btn-success"><i class="fa fa-file"></i>Resumen notificaciones Excel</a>
 
         </div>

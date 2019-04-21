@@ -96,3 +96,5 @@ RewriteRule ^Equipo-Detalle-(\w+)$          index.php?c=equipo&a=wiewsDalleteEqu
 RewriteRule ^Equipo-Editar-(\w+)$           index.php?c=equipo&a=wiewsDalleteEquipo&Editar=$1
 RewriteRule ^Equipo-Acta-(\w+)$             index.php?c=equipo&a=ActaEntregaEquipo&Acta=$1
 RewriteRule ^EquipoLaptop-Detalle-(\w+)$    index.php?c=equipo&a=wiewsDalleteEquipoLaptop&Detalle=$1
+#Acciones Notificacion
+RewriteRule ^Notificacion-Excel             index.php?c=notificacion&a=excelNotificacion
