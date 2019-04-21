@@ -48,6 +48,7 @@ RewriteRule ^ConsultaCirculares$            index.php?c=circular&a=consultCircu
 RewriteRule ^ConsultaInstrucciones$         index.php?c=instruccion&a=consultInstru
 RewriteRule ^ConsultaReparacionEquipo$      index.php?c=reparacionequipo&a=consulReparacionEquipo
 RewriteRule ^ConsultaEquipo$                index.php?c=equipo&a=wiewsConstEquipos
+RewriteRule ^ConsultaNotificaciones$        index.php?c=notificacion&a=wiewsReporNotification
 
 #Visitantes
 RewriteRule ^VisitantesRegistro$            index.php?c=visitante&a=wiewsReporVisit
