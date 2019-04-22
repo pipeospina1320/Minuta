@@ -690,7 +690,8 @@ class NotificacionController
         $notificaciones = $this->model->consultaNotificacion();
 
         // Hoja de protocolos
-        $objPHPExcel->createSheet(0)
+        $objWorksheet = $objPHPExcel->createSheet(0);
+        $objWorksheet
             ->setCellValue('A1', 'id')
             ->setCellValue('B1', 'fecha')
             ->setCellValue('C1', 'Descripcion')
@@ -699,7 +700,7 @@ class NotificacionController
         $i = 2;
         foreach ($notificaciones[0] as $row => $protocolo) {
             // Agregar Informacion
-            $objPHPExcel->setActiveSheetIndex(0)
+            $objWorksheet
                 ->setCellValue('A' . $i, $protocolo[0])
                 ->setCellValue('B' . $i, $protocolo[3])
                 ->setCellValue('C' . $i, $protocolo[1])
@@ -708,11 +709,13 @@ class NotificacionController
             $i++;
         }
         // Renombrar Hoja
-        $objPHPExcel->getActiveSheet()->setTitle('N. protocolo');
+//        $objPHPExcel->getActiveSheet()->setTitle('N. protocolo');
+        $objWorksheet->setTitle('N. protocolo');
 //--------------------------------------------------------------------------------------------------------------
 
         // hoja de instruccion manual
-        $objPHPExcel->createSheet(1)
+        $objWorksheet = $objPHPExcel->createSheet(1);
+        $objWorksheet
             ->setCellValue('A1', 'id')
             ->setCellValue('B1', 'fecha')
             ->setCellValue('C1', 'Descripcion')
@@ -721,7 +724,7 @@ class NotificacionController
         $i = 2;
         foreach ($notificaciones[1] as $row => $protocolo) {
             // Agregar Informacion
-            $objPHPExcel->setActiveSheetIndex(1)
+            $objWorksheet
                 ->setCellValue('A' . $i, $protocolo[0])
                 ->setCellValue('B' . $i, $protocolo[3])
                 ->setCellValue('C' . $i, $protocolo[1])
@@ -731,11 +734,12 @@ class NotificacionController
         }
 
         // Renombrar Hoja
-        $objPHPExcel->getActiveSheet()->setTitle('N. instruccion manual');
+        $objWorksheet->setTitle('N. instruccion manual');
 //----------------------------------------------------------------------------------------------------
 
         // Hoja de consigna particular
-        $objPHPExcel->createSheet(2)
+        $objWorksheet = $objPHPExcel->createSheet(2);
+        $objWorksheet
             ->setCellValue('A1', 'id')
             ->setCellValue('B1', 'fecha')
             ->setCellValue('C1', 'Descripcion')
@@ -744,7 +748,8 @@ class NotificacionController
         $i = 2;
         foreach ($notificaciones[2] as $row => $protocolo) {
             // Agregar Informacion
-            $objPHPExcel->setActiveSheetIndex(2)
+//            $objPHPExcel->setActiveSheetIndex(2)
+            $objWorksheet
                 ->setCellValue('A' . $i, $protocolo[0])
                 ->setCellValue('B' . $i, $protocolo[3])
                 ->setCellValue('C' . $i, $protocolo[1])
@@ -753,11 +758,12 @@ class NotificacionController
             $i++;
         }
         // Renombrar Hoja
-        $objPHPExcel->getActiveSheet()->setTitle('N. consigana particular');
+        $objWorksheet->setTitle('N. consigana particular');
 //--------------------------------------------------------------------------------------------------------------
 
         // Hoja de condigna general
-        $objPHPExcel->createSheet(3)
+        $objWorksheet = $objPHPExcel->createSheet(3);
+        $objWorksheet
             ->setCellValue('A1', 'id')
             ->setCellValue('B1', 'fecha')
             ->setCellValue('C1', 'Descripcion')
@@ -766,7 +772,7 @@ class NotificacionController
         $i = 2;
         foreach ($notificaciones[3] as $row => $protocolo) {
             // Agregar Informacion
-            $objPHPExcel->setActiveSheetIndex(3)
+            $objWorksheet
                 ->setCellValue('A' . $i, $protocolo[0])
                 ->setCellValue('B' . $i, $protocolo[3])
                 ->setCellValue('C' . $i, $protocolo[1])
@@ -775,12 +781,13 @@ class NotificacionController
             $i++;
         }
         // Renombrar Hoja
-        $objPHPExcel->getActiveSheet()->setTitle('N. consigana general');
+        $objWorksheet->setTitle('N. consigana general');
 //--------------------------------------------------------------------------------------------------------------
 
 
         // Hoja de circular
-        $objPHPExcel->createSheet(4)
+        $objWorksheet = $objPHPExcel->createSheet(4);
+        $objWorksheet
             ->setCellValue('A1', 'id')
             ->setCellValue('B1', 'fecha')
             ->setCellValue('C1', 'Descripcion')
@@ -789,7 +796,8 @@ class NotificacionController
         $i = 2;
         foreach ($notificaciones[4] as $row => $protocolo) {
             // Agregar Informacion
-            $objPHPExcel->setActiveSheetIndex(4)
+            $objWorksheet
+                ->setActiveSheetIndex(4)
                 ->setCellValue('A' . $i, $protocolo[0])
                 ->setCellValue('B' . $i, $protocolo[3])
                 ->setCellValue('C' . $i, $protocolo[1])
@@ -798,12 +806,13 @@ class NotificacionController
             $i++;
         }
         // Renombrar Hoja
-        $objPHPExcel->getActiveSheet()->setTitle('N. circular');
+        $objWorksheet->setTitle('N. circular');
 //--------------------------------------------------------------------------------------------------------------
 
 
         // Hoja de instruccion
-        $objPHPExcel->createSheet(5)
+        $objWorksheet = $objPHPExcel->createSheet(5);
+        $objWorksheet
             ->setCellValue('A1', 'id')
             ->setCellValue('B1', 'fecha')
             ->setCellValue('C1', 'Descripcion')
@@ -812,7 +821,7 @@ class NotificacionController
         $i = 2;
         foreach ($notificaciones[5] as $row => $protocolo) {
             // Agregar Informacion
-            $objPHPExcel->setActiveSheetIndex(5)
+            $objWorksheet
                 ->setCellValue('A' . $i, $protocolo[0])
                 ->setCellValue('B' . $i, $protocolo[3])
                 ->setCellValue('C' . $i, $protocolo[1])
@@ -821,7 +830,7 @@ class NotificacionController
             $i++;
         }
         // Renombrar Hoja
-        $objPHPExcel->getActiveSheet()->setTitle('N. instruccion');
+        $objWorksheet->setTitle('N. instruccion');
 //--------------------------------------------------------------------------------------------------------------
 
 

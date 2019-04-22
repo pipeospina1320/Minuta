@@ -569,7 +569,7 @@ class NotificacionModel
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
-            $sqlcg = 'SELECT ncg.noticg_id, c.consig_descripcion, ncg.noticg_leido, c.consig_fecha
+            $sqlcg = 'SELECT ncg.noticg_id, c.consig_descripcion, ncg.noticg_leido, c.consig_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
              FROM notificacioncg ncg JOIN consignageneral c ON ncg.noticg_notificacion = c.consig_id, usuario AS u
              WHERE ncg.noticg_id > 0
@@ -578,7 +578,7 @@ class NotificacionModel
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
-            $sqlcir = 'SELECT ncir.noticir_id, c.circu_descripcion, ncir.noticir_leido, c.circu_fecha
+            $sqlcir = 'SELECT ncir.noticir_id, c.circu_descripcion, ncir.noticir_leido, c.circu_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
              FROM notificacioncir ncir JOIN circular c ON ncir.noticir_notificacion = c.circu_id, usuario AS u
              WHERE ncir.noticir_id > 0
@@ -587,7 +587,7 @@ class NotificacionModel
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
-            $sqlins = 'SELECT nins.notins_id, i.instru_descripcion, nins.notins_leido, i.instru_fecha
+            $sqlins = 'SELECT nins.notins_id, i.instru_descripcion, nins.notins_leido, i.instru_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
              FROM notificacionins nins JOIN instruccion i ON nins.notins_notificacion = i.instru_id, usuario AS u
              WHERE nins.notins_id > 0
