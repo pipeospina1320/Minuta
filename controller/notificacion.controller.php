@@ -797,7 +797,6 @@ class NotificacionController
         foreach ($notificaciones[4] as $row => $protocolo) {
             // Agregar Informacion
             $objWorksheet
-                ->setActiveSheetIndex(4)
                 ->setCellValue('A' . $i, $protocolo[0])
                 ->setCellValue('B' . $i, $protocolo[3])
                 ->setCellValue('C' . $i, $protocolo[1])
