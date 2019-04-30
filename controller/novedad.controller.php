@@ -293,10 +293,10 @@ class NovedadController
                     echo '<button type="button" class="btn btn-info btn-sm">NO</button>';
                 }
                 echo '</td>';
-                if ($item["nove_estado"] == 1) {
-                    echo '<td style="text-align:center;"><button type="button" id="observacionnovedades" class="btn btn-danger btn-sm" value=' . $item["nove_id"] . '><i class="fa fa-eye fa-lg"></i></button></td>';
-                } elseif ($item["nove_estado"] == 0) {
-                    echo '<td style="text-align:center;"><button type="button" class="btn btn-default btn-sm" ><i class="fa fa-eye-slash fa-lg"></i></button></td>';
+                if ($item["nove_estado"] == 0) {
+                    echo '<td style="text-align:center;"><button type="button" id="observacionnovedad" class="btn btn-warning btn-sm" value=' . $item["nove_id"] . '><i class="fa fa-edit fa-lg"></i></button></td>';
+                } else if ($item["nove_estado"] == 1) {
+                    echo '<td style="text-align:center;"><button type="button" class="btn btn-danger btn-sm" id="verobservacion" value=' . $item["nove_id"] . '><i class="fa fa-eye fa-lg"></i></button></td>';
                 }
                 echo '<td>
                         <a target="_blank" href="Novedad-Acta-' . $item["nove_id"] . '" class="btn btn-warning btn-xs"><i class="fa fa-file"></i> Generar Acta </a>

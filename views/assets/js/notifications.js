@@ -92,7 +92,8 @@ $(document).ready(function(){
               showConfirmButton: true},
               function(isConfirm){
                 if (isConfirm) {
-                   location.href="ConsultaNovedades-Total";
+                    location.reload();
+                   // location.href="ConsultaNovedades-Total";
                 }
               });
        }else if (data == false) {
