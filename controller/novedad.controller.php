@@ -204,6 +204,7 @@ class NovedadController
                         <th style="width:40px">Mes</th>
                         <th style="width:60px">Año</th>
                         <th style="width:100px">Hora</th>
+                        <th style="width:100px">Puesto</th>
                         <th style="width:150px">Asunto</th>
                         <th style="width:300px">Anotaciones</th>       
                     </tr>
@@ -215,6 +216,7 @@ class NovedadController
             $tNovedad = $minuta['tn_nombre'];
             $desNovedad = $minuta['nove_novedad'];
             $fechaNovedad = $minuta['nove_fechas'];
+            $puesto = $minuta['sed_nombre'];
             $fechaNovedad = preg_split("/[\s.-]+/", $fechaNovedad);
             $html .= '
             <tr role="row">
@@ -222,8 +224,9 @@ class NovedadController
                 <td style="width:40px">' . $fechaNovedad[1] . '</td>
                 <td style="width:60px">' . $fechaNovedad[0] . '</td>
                 <td style="width:100px">' . $fechaNovedad[3] . '</td>
+                <td style="width:100px">' . $puesto . '</td>
                 <td style="width:150px">' . $tNovedad . '</td>
-                <td style="width:300px">' . $desNovedad . '</td>
+                <td style="width:300px">' . $desNovedad . '<br><br><b>' . $nombreUsuario . '</b></td>
             </tr>
         ';
         }
