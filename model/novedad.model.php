@@ -28,7 +28,7 @@ class NovedadModel
             $sql = "INSERT INTO novedad (clien_id, sed_id, servi_id, nove_turno , nove_novedad, nove_fecha, nove_fechareal, usua_id, tn_id, nove_file, nove_nomarchivo, nove_foto,firma1_file,firma2_file) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $query = $this->pdo->prepare($sql);
             $save = $query->execute(array($idcliente, $novedad[0], $novedad[1], $novedad[2], $novedad[4], $conver_fecha, $conver_fechareal, $idsession, $novedad[3], $dirc_file, $new_nom_archivo, $foto, $dirc_firma1, $dirc_firma2));
-            // var_dump($save);
+            $error = $query->errorInfo();
             if ($save == 1) {
                 return true;
             } else {
@@ -189,7 +189,7 @@ class NovedadModel
             }
             $parametros[] = $_SESSION["idcliente"];
             $sql = "SELECT c.clien_nombre,  s.sed_nombre, e.servi_nombre,  n.nove_turno, t.tn_nombre, n.nove_novedad,  DATE_FORMAT(n.nove_fecha, '%Y-%m-%d %H:%i') AS nove_fechas, DATE_FORMAT(n.nove_fechareal, '%Y-%m-%d %H:%i') AS nove_fechasreal,  u.usua_nombre1, u.usua_nombre2, u.usua_apellido1, u.usua_apellido2,
-              n.nove_foto, n.nove_id, n.nove_estado
+              n.nove_foto, n.nove_id, n.nove_estado, n.nove_file
               FROM novedad AS n
               INNER JOIN usuario AS u, cliente AS c, sede AS s, servicio AS e, tiponovedad AS t
               WHERE n.usua_id = u.usua_id

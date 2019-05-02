@@ -427,6 +427,8 @@ class NovedadController
         $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
         $cliente = $novedad[0]['clien_nombre'];
         $rutaFirma = $novedad[0]['firma1_file'];
+        $strRutaArchivos = $novedad[0]['nove_file'];
+        $arrRutaArchivos = explode(",", $strRutaArchivos);
         $cargo = $novedad[0]['carg_nombre'];
         $sede = $novedad[0]['sed_nombre'];
         $servicio = $novedad[0]['servi_nombre'];
@@ -466,6 +468,11 @@ class NovedadController
             <p align="justify">' . ucfirst(strtolower($desNovedad)) . '</p>
             </div>
 
+            ';
+
+
+        $html .= '
+
             <div id="firma" style="width: 650px;height: 100px">';
 
         if (!$rutaFirma) {
@@ -483,6 +490,17 @@ class NovedadController
             COVITEC LTDA
             </p>';
         }
+        $html .= '</div>
+            <div id="firma" style="width: 650px;height: 100px">';
+
+        foreach ($arrRutaArchivos as $rutaArchivo) {
+            if (!$rutaFirma) {
+                $html .= '';
+            } else {
+                $html .= '<img src="' . $rutaArchivo . '" alt="logo" width="600px" height="400px"><br><br>';
+            }
+        };
+
         $html .= '</div>
         </div>
         ';
