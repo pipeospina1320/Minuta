@@ -91,4 +91,12 @@
     border: 1px solid #ABB2B9;
     width:250;
     height: 187;
-    }
+ }
+ 
+ .exportexcel {
+    margin-bottom: 10px
+}
+
+.lightRed {
+    background-color: #f0aaaa !important
+}

@@ -41,6 +41,12 @@
   <!-- Datatables -->
   <script src="views/assets/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="views/assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<?php
+if ($_GET["c"] == "reparacionequipo" && $_GET["a"] == "consulReparacionEquipo") {
+    echo '<script src="views/assets/datatables.net-bs/js/dataTables.responsive.min.js"></script>
+  <script src="views/assets/datatables.net-bs/js/responsive.bootstrap.min.js"></script>';
+}
+?>
   <!-- FastClick -->
   <script src="views/assets/fastclick/lib/fastclick.js"></script>
   <!-- bootstrap-daterangepicker -->
@@ -58,6 +64,9 @@
   <script src="views/assets/js/sweetalert.min.js"></script>
   <!-- Push -->
   <!-- <script src="views/assets/js/push.min.js"></script> -->
+<?php if ($_GET["c"] == "reparacionequipo" && $_GET["a"] == "consulReparacionEquipo") {
+    echo '  <script src="views/assets/js/equipoenreparacion.js?' . time() . '"></script>';
+}?>
   <!-- Notifications -->
   <script src="views/assets/js/notifications.js?<?php echo time(); ?>"></script>
   <!-- Parsley -->

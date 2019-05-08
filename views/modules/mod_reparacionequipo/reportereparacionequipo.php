@@ -24,9 +24,9 @@
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="selecioncliente">
             <option value=""></option>
             <?php
-            $selectcliente = new NovedadController();
-            $selectcliente -> selectClient();
-             ?>
+$selectcliente = new NovedadController();
+$selectcliente->selectClient();
+?>
           </select>
         </div>
       </div>
@@ -46,16 +46,20 @@
         </div>
       </div>
 
-      <div class="item form-group">
+      <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">Status: <span class="required">*</span></label>
-        <div class="col-md-8 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-3 col-xs-12">
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="selecionastatus">
             <option value=""></option>
             <?php
-            $selectstatu = new ReparacionEquipoController();
-            $selectstatu -> selectStatus();
-             ?>
+$selectstatu = new ReparacionEquipoController();
+$selectstatu->selectStatus();
+?>
           </select>
+        </div>
+        <label class="control-label col-md-2 col-sm-3 col-xs-12">Costo: <span class="required"></span></label>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+          <input type="number" class="form-control" name="frmcreateRepaEquipoAdd[]" required="required" id="modelorequipo">
         </div>
       </div>
 
@@ -64,9 +68,9 @@
         <div class="col-md-8 col-sm-6 col-xs-12">
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="arearequipo">
             <?php
-            $selectarea = new ReparacionEquipoController();
-            $selectarea -> selectArea();
-             ?>
+$selectarea = new ReparacionEquipoController();
+$selectarea->selectArea();
+?>
           </select>
         </div>
       </div>
@@ -77,9 +81,9 @@
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="disposotivorequipo">
             <option value=""></option>
             <?php
-            $selectdispositivo = new ReparacionEquipoController();
-            $selectdispositivo -> selectDispositivo();
-             ?>
+$selectdispositivo = new ReparacionEquipoController();
+$selectdispositivo->selectDispositivo();
+?>
           </select>
         </div>
       </div>
@@ -87,12 +91,12 @@
       <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">Marca: <span class="required">*</span></label>
         <div class="col-md-3 col-sm-3 col-xs-12">
-          <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="marcarequipo">>
+          <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="marcarequipo">
             <option value=""></option>
             <?php
-            $selectmarca = new ReparacionEquipoController();
-            $selectmarca -> selectMarca();
-             ?>
+$selectmarca = new ReparacionEquipoController();
+$selectmarca->selectMarca();
+?>
           </select>
         </div>
         <label class="control-label col-md-2 col-sm-3 col-xs-12">Modelo: <span class="required">*</span></label>
@@ -177,9 +181,9 @@
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="provedorrequipo" >
             <option value=""></option>
             <?php
-            $selectprovedor = new ReparacionEquipoController();
-            $selectprovedor -> selectProveedor();
-             ?>
+$selectprovedor = new ReparacionEquipoController();
+$selectprovedor->selectProveedor();
+?>
           </select>
         </div>
       </div>
@@ -190,9 +194,9 @@
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="reparadorequipo">
             <option value=""></option>
             <?php
-            $selectreparado = new ReparacionEquipoController();
-            $selectreparado -> selectRepatado();
-             ?>
+$selectreparado = new ReparacionEquipoController();
+$selectreparado->selectRepatado();
+?>
           </select>
         </div>
       </div>
@@ -203,9 +207,9 @@
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="asesorrequipo">
             <option value=""></option>
             <?php
-            $selectasesor = new ReparacionEquipoController();
-            $selectasesor -> selectAsesor();
-             ?>
+$selectasesor = new ReparacionEquipoController();
+$selectasesor->selectAsesor();
+?>
           </select>
         </div>
       </div>
@@ -216,9 +220,9 @@
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="tecnicorequipo">
             <option value=""></option>
             <?php
-            $selectecnico = new ReparacionEquipoController();
-            $selectecnico -> selectTecnico();
-             ?>
+$selectecnico = new ReparacionEquipoController();
+$selectecnico->selectTecnico();
+?>
           </select>
         </div>
       </div>
@@ -229,9 +233,9 @@
           <select class="select2_single form-control" tabindex="-1" name="frmcreateRepaEquipo[]" required="required" id="estadorequipo">
             <option value=""></option>
             <?php
-            $selectestado = new ReparacionEquipoController();
-            $selectestado -> selectEstado();
-             ?>
+$selectestado = new ReparacionEquipoController();
+$selectestado->selectEstado();
+?>
           </select>
         </div>
       </div>

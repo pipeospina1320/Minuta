@@ -52,11 +52,18 @@ $rol = $_SESSION["cargo"];
     <!-- NProgress -->
     <link href="views/assets/nprogress/nprogress.css" rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="views/assets/build/css/custom.min.css?<?php echo time(); ?>" rel="stylesheet">
+    <link href="views/assets/build/css/custom.min.css" rel="stylesheet">
+	    <!-- Datatables -->
+<?php
+if ($_GET["c"] == "reparacionequipo" && $_GET["a"] == "consulReparacionEquipo") {
+    echo '<link rel="stylesheet" href="views/assets/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="views/assets/datatables.net-bs/css/responsive.bootstrap.min.css">';
+} else {
+    echo '<link href="views/assets/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">';
+}
+?>
     <!-- Style Css personalize -->
-    <link href="views/assets/css/home.css" rel="stylesheet">
-    <!-- Datatables -->
-    <link href="views/assets/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="views/assets/css/home.css?<?php echo time(); ?>" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="views/assets/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- bootstrap-datetimepicker -->
