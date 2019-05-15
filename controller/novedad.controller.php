@@ -428,11 +428,8 @@ class NovedadController
         $cliente = $novedad[0]['clien_nombre'];
         $rutaFirma = $novedad[0]['firma1_file'];
         $strRutaArchivos = $novedad[0]['nove_file'];
-        if (strpos($strRutaArchivos, ',') === true) {
-            $arrRutaArchivos = explode(",", $strRutaArchivos);
-        } else {
-            $arrRutaArchivos[] = $strRutaArchivos;
-        }
+        $arrRutaArchivos = explode(",", $strRutaArchivos);
+
         $cargo = $novedad[0]['carg_nombre'];
         $sede = $novedad[0]['sed_nombre'];
         $servicio = $novedad[0]['servi_nombre'];
@@ -498,7 +495,7 @@ class NovedadController
             <div id="firma" style="width: 650px;height: 100px">';
 
         foreach ($arrRutaArchivos as $rutaArchivo) {
-            if (!$rutaFirma) {
+            if (!$rutaArchivo) {
                 $html .= '';
             } else {
                 $html .= '<img src="' . $rutaArchivo . '" alt="logo" width="600px" height="400px"><br><br>';
@@ -509,7 +506,8 @@ class NovedadController
         </div>
         ';
         $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
-        $mpdf->WriteHTML($html);
+//        $mpdf->WriteHTML($html);
+        $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output('actaMinuta.pdf', 'D');
 
         exit;
