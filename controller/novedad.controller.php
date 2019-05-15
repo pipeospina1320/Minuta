@@ -428,7 +428,11 @@ class NovedadController
         $cliente = $novedad[0]['clien_nombre'];
         $rutaFirma = $novedad[0]['firma1_file'];
         $strRutaArchivos = $novedad[0]['nove_file'];
-        $arrRutaArchivos = explode(",", $strRutaArchivos);
+        if (strpos($strRutaArchivos, ',') === true) {
+            $arrRutaArchivos = explode(",", $strRutaArchivos);
+        } else {
+            $arrRutaArchivos[] = $strRutaArchivos;
+        }
         $cargo = $novedad[0]['carg_nombre'];
         $sede = $novedad[0]['sed_nombre'];
         $servicio = $novedad[0]['servi_nombre'];
