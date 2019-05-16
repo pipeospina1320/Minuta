@@ -427,6 +427,7 @@ class NovedadController
         $nombreUsuario = $novedad[0]['usua_nombre1'] . " " . $novedad[0]['usua_nombre2'] . " " . $novedad[0]['usua_apellido1'] . " " . $novedad[0]['usua_apellido2'];
         $cliente = $novedad[0]['clien_nombre'];
         $rutaFirma = $novedad[0]['firma1_file'];
+        $rutaFirma2 = $novedad[0]['firma2_file'];
         $strRutaArchivos = $novedad[0]['nove_file'];
         $arrRutaArchivos = explode(",", $strRutaArchivos);
 
@@ -476,15 +477,37 @@ class NovedadController
 
             <div id="firma" style="width: 650px;height: 100px">';
 
-        if (!$rutaFirma) {
+        if (!$rutaFirma && !$rutaFirma2) {
             $html .= '
             <p><b>_______________________________________________</b><br>
             <b>' . $nombreUsuario . '</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
             </p>';
+        } elseif ($rutaFirma && !$rutaFirma2) {
+            $html .= '<img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px">
+            <p><b>_______________________________________________</b><br>
+            <b>' . $nombreUsuario . '</b><br>
+            ' . $cargo . '<br>
+            COVITEC LTDA
+            </p>';
+        } elseif (!$rutaFirma && $rutaFirma2) {
+            $html .= '
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
+            <p><b>_______________________________________________</b><br>
+            <b>' . $nombreUsuario . '</b><br>
+            ' . $cargo . '<br>
+            COVITEC LTDA
+            </p>';
         } else {
-            $html .= '<img src="' . $rutaFirma . '" alt="logo" width="225px" height="80px">
+            $html .= '<img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
             <p><b>_______________________________________________</b><br>
             <b>' . $nombreUsuario . '</b><br>
             ' . $cargo . '<br>
@@ -492,8 +515,7 @@ class NovedadController
             </p>';
         }
         $html .= '</div>
-            <div id="firma" style="width: 650px;height: 100px">';
-
+            <div id="evidencia" style="width: 650px;height: 100px">';
         foreach ($arrRutaArchivos as $rutaArchivo) {
             if (!$rutaArchivo) {
                 $html .= '';
