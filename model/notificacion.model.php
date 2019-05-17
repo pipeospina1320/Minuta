@@ -544,54 +544,60 @@ class NotificacionModel
         try {
             $sqlp = 'SELECT ntp.notip_id, p.proto_descripcion, ntp.notip_leido ,p.proto_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
-             FROM notificacionp ntp JOIN protocolo p ON ntp.notip_notificacion = p.proto_id, usuario AS u
-             WHERE ntp.notip_id > 0
-             AND p.usua_id = u.usua_id';
+             FROM notificacionp ntp 
+             JOIN protocolo p ON ntp.notip_notificacion = p.proto_id
+             JOIN usuario u ON ntp.notip_usuario = u.usua_id
+             WHERE ntp.notip_id > 0';
             $query = $this->pdo->prepare($sqlp);
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
             $sqlinsm = 'SELECT ninsm.notinsm_id, i.instruman_descripcion, ninsm.notinsm_leido, i.instruman_fecha, 
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
-             FROM notificacioninsm ninsm JOIN instruccionmanual i ON ninsm.notinsm_notificacion = i.instruman_id, usuario AS u
-             WHERE ninsm.notinsm_id > 0
-             AND i.usua_id = u.usua_id';
+             FROM notificacioninsm ninsm 
+             JOIN instruccionmanual i ON ninsm.notinsm_notificacion = i.instruman_id
+             JOIN usuario u ON ninsm.notinsm_usuario = u.usua_id
+             WHERE ninsm.notinsm_id > 0';
             $query = $this->pdo->prepare($sqlinsm);
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
             $sqlcp = 'SELECT ncp.noticp_id, c.consigp_descripcion, ncp.noticp_leido, c.consigp_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
-             FROM notificacioncp ncp JOIN consignaparticular c ON ncp.noticp_notificacion = c.consigp_id, usuario AS u
-             WHERE ncp.noticp_id > 0
-             AND c.usua_id = u.usua_id';
+             FROM notificacioncp ncp 
+             JOIN consignaparticular c ON ncp.noticp_notificacion = c.consigp_id
+             JOIN usuario u ON ncp.noticp_usuario = u.usua_id
+             WHERE ncp.noticp_id > 0';
             $query = $this->pdo->prepare($sqlcp);
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
             $sqlcg = 'SELECT ncg.noticg_id, c.consig_descripcion, ncg.noticg_leido, c.consig_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
-             FROM notificacioncg ncg JOIN consignageneral c ON ncg.noticg_notificacion = c.consig_id, usuario AS u
-             WHERE ncg.noticg_id > 0
-             AND c.usua_id = u.usua_id';
+             FROM notificacioncg ncg 
+             JOIN consignageneral c ON ncg.noticg_notificacion = c.consig_id
+             JOIN usuario u ON ncg.noticg_usuario = u.usua_id
+             WHERE ncg.noticg_id > 0';
             $query = $this->pdo->prepare($sqlcg);
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
             $sqlcir = 'SELECT ncir.noticir_id, c.circu_descripcion, ncir.noticir_leido, c.circu_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
-             FROM notificacioncir ncir JOIN circular c ON ncir.noticir_notificacion = c.circu_id, usuario AS u
-             WHERE ncir.noticir_id > 0
-             AND c.usua_id = u.usua_id';
+             FROM notificacioncir ncir 
+             JOIN circular c ON ncir.noticir_notificacion = c.circu_id
+             JOIN usuario u ON ncir.noticir_usuario = u.usua_id
+             WHERE ncir.noticir_id > 0';
             $query = $this->pdo->prepare($sqlcir);
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
 
             $sqlins = 'SELECT nins.notins_id, i.instru_descripcion, nins.notins_leido, i.instru_fecha,
              CONCAT(UPPER(LEFT(u.usua_nombre1, 1)), LOWER(SUBSTRING(u.usua_nombre1,2))) AS usua_nombre1, CONCAT(UPPER(LEFT(u.usua_apellido1, 1)), LOWER(SUBSTRING(u.usua_apellido1,2))) AS usua_apellido1
-             FROM notificacionins nins JOIN instruccion i ON nins.notins_notificacion = i.instru_id, usuario AS u
-             WHERE nins.notins_id > 0
-             AND i.usua_id = u.usua_id';
+             FROM notificacionins nins 
+             JOIN instruccion i ON nins.notins_notificacion = i.instru_id
+             JOIN usuario u ON nins.notins_usuario = u.usua_id
+             WHERE nins.notins_id > 0';
             $query = $this->pdo->prepare($sqlins);
             $const = $query->execute();
             $response[] = $query->fetchALL(PDO::FETCH_BOTH);
