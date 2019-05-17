@@ -289,6 +289,7 @@ class NovedadController
             <td>' . $item["servi_nombre"] . '</td>
             <td>' . $item["nove_turno"] . '</td>
             <td>' . $item["usua_nombre1"] . ' ' . $item["usua_nombre2"] . ' ' . $item["usua_apellido1"] . ' ' . $item["usua_apellido2"] . '</td>
+            <td>' . $item["nove_fechasreal"] . '</td>
             <td style="text-align:center;">';
                 if ($item["nove_foto"] == 1) {
                     echo '<button type="button" id="FotoEvidencia" class="btn btn-info btn-sm" value=' . $item["nove_id"] . '>SI</button>';
@@ -487,7 +488,7 @@ class NovedadController
         } elseif ($rutaFirma && !$rutaFirma2) {
             $html .= '<img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px">
             <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
-            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REPONSABLE</b><br>
+            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RESPONSABLE</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
             </p>';
@@ -500,7 +501,7 @@ class NovedadController
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
             <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
-            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REPONSABLE</b><br>
+            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RESPONSABLE</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
             </p>';
@@ -509,7 +510,7 @@ class NovedadController
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
             <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
-            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REPONSABLE</b><br>
+            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RESPONSABLE</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
             </p>';

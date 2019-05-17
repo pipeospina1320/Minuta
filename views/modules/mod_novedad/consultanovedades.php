@@ -99,6 +99,7 @@
                     <th>Servicio</th>
                     <th>Turno</th>
                     <th>Reporta Novedad</th>
+                    <th>Fecha Real N.</th>
                     <th>Evidencia</th>
                     <th>Estado</th>
                     <th></th>
