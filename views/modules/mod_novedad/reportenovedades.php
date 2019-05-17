@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="imagenFirma">Firma digital:</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="imagenFirma">Firma reporta:</label>
                     <canvas class="col-md-6 col-sm-8 col-xs-12" id="canvas" width="350%" height="100%"
                             onclick="canvas(this.id,'imagen1')"
                             style="border:solid black 1px;">
@@ -126,7 +126,7 @@
                            value="limpiar firma">
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="imagenFirma">Firma digital:</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="imagenFirma">Firma responsable:</label>
                     <canvas class="col-md-6 col-sm-8 col-xs-12" id="canvas1" width="350%" height="100%"
                             onclick="canvas(this.id,'imagen2')"
                             style="border:solid black 1px;">
