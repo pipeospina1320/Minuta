@@ -486,8 +486,8 @@ class NovedadController
             </p>';
         } elseif ($rutaFirma && !$rutaFirma2) {
             $html .= '<img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px">
-            <p><b>_______________________________________________</b><br>
-            <b>' . $nombreUsuario . '</b><br>
+            <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
+            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REPONSABLE</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
             </p>';
@@ -499,8 +499,8 @@ class NovedadController
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
-            <p><b>_______________________________________________</b><br>
-            <b>' . $nombreUsuario . '</b><br>
+            <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
+            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REPONSABLE</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
             </p>';
@@ -508,8 +508,8 @@ class NovedadController
             $html .= '<img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
-            <p><b>_______________________________________________</b><br>
-            <b>' . $nombreUsuario . '</b><br>
+            <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
+            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REPONSABLE</b><br>
             ' . $cargo . '<br>
             COVITEC LTDA
             </p>';
