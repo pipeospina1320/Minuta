@@ -529,8 +529,8 @@ class NovedadController
         </div>
         ';
         $mpdf = new Mpdf('c', 'A4', 12, '', 15, 10, 5, 10, 40);
-//        $mpdf->WriteHTML($html);
-        $mpdf->WriteHTML(utf8_encode($html));
+        $mpdf->WriteHTML($html);
+//        $mpdf->WriteHTML(utf8_encode($html));
         $mpdf->Output('actaMinuta.pdf', 'D');
 
         exit;
