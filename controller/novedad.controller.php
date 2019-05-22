@@ -247,7 +247,10 @@ class NovedadController
     //Funcion para consultar tabla de novedades
     public function consultaFiltroNovedad()
     {
-//
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        $rol = $_SESSION["cargo"];
         $fechaInicio = "";
         $fechaFin = "";
         $tipoNovedad = "";
@@ -297,14 +300,26 @@ class NovedadController
                     echo '<button type="button" class="btn btn-info btn-sm">NO</button>';
                 }
                 echo '</td>';
-                if ($item["nove_estado"] == 0) {
-                    echo '<td style="text-align:center;"><button type="button" id="observacionnovedad" class="btn btn-warning btn-sm" value=' . $item["nove_id"] . '><i class="fa fa-edit fa-lg"></i></button></td>';
-                } else if ($item["nove_estado"] == 1) {
-                    echo '<td style="text-align:center;"><button type="button" class="btn btn-danger btn-sm" id="verobservacion" value=' . $item["nove_id"] . '><i class="fa fa-eye fa-lg"></i></button></td>';
-                }
-                echo '<td>
+
+                if ($rol == 2 || $rol == 3 || $rol == 9) {
+                    if ($item["nove_estado"] == 0) {
+                        echo '<td style="text-align:center;"><button type="button" id="observacionnovedad" class="btn btn-warning btn-sm" value=' . $item["nove_id"] . '><i class="fa fa-edit fa-lg"></i></button></td>';
+                    } else if ($item["nove_estado"] == 1) {
+                        echo '<td style="text-align:center;"><button type="button" class="btn btn-danger btn-sm" id="verobservacion" value=' . $item["nove_id"] . '><i class="fa fa-eye fa-lg"></i></button></td>';
+                    }
+                    echo '<td>
                         <a target="_blank" href="Novedad-Acta-' . $item["nove_id"] . '" class="btn btn-warning btn-xs"><i class="fa fa-file"></i> Generar Acta </a>
                        </td>';
+                } else {
+                    if ($item["nove_estado"] == 1) {
+                        echo '<td style="text-align:center;"><button type="button" id="verobservacion" class="btn btn-danger btn-sm" value=' . $item["nove_id"] . '><i class="fa fa-eye fa-lg"></i></button></td>';
+                    } elseif ($item["nove_estado"] == 0) {
+                        echo '<td style="text-align:center;"><button type="button" class="btn btn-default btn-sm" ><i class="fa fa-eye-slash fa-lg"></i></button></td>';
+                    }
+                }
+//                echo '<td>
+//                        <a target="_blank" href="Novedad-Acta-' . $item["nove_id"] . '" class="btn btn-warning btn-xs"><i class="fa fa-file"></i> Generar Acta </a>
+//                       </td>';
             }
             echo '</tr>';
         }
@@ -480,40 +495,100 @@ class NovedadController
 
         if (!$rutaFirma && !$rutaFirma2) {
             $html .= '
-            <p><b>_______________________________________________</b><br>
-            <b>' . $nombreUsuario . '</b><br>
-            ' . $cargo . '<br>
-            COVITEC LTDA
-            </p>';
+            <br>
+            <table>
+                <tr role="row">
+                    <td style="width: 380px;"><b>__________________________________________</b></td>
+                    <td style="width: 320px;"><b>____________________________________</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;"><b>' . $nombreUsuario . '</b></td>
+                    <td style="width: 320px;"><b>RESPONSABLE</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">' . $cargo . '</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">COVITEC LTDA</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+            </table>';
+
         } elseif ($rutaFirma && !$rutaFirma2) {
-            $html .= '<img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px">
-            <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
-            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RESPONSABLE</b><br>
-            ' . $cargo . '<br>
-            COVITEC LTDA
-            </p>';
+            $html .= '
+            <table>
+            <tr role="row">
+                    <td style="width: 380px;"><img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px"></td>
+                    <td style="width: 320px;"></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;"><b>__________________________________________</b></td>
+                    <td style="width: 320px;"><b>____________________________________</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;"><b>' . $nombreUsuario . '</b></td>
+                    <td style="width: 320px;"><b>RESPONSABLE</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">' . $cargo . '</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">COVITEC LTDA</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+            </table>
+            ';
+
         } elseif (!$rutaFirma && $rutaFirma2) {
             $html .= '
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
-            <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
-            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RESPONSABLE</b><br>
-            ' . $cargo . '<br>
-            COVITEC LTDA
-            </p>';
+            <table>
+            <tr role="row">
+                    <td style="width: 380px;"></td>
+                    <td style="width: 320px;"><img src="' . $rutaFirma2 . '" alt="sin firma" width="250px" height="80px"></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;"><b>__________________________________________</b></td>
+                    <td style="width: 320px;"><b>____________________________________</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;"><b>' . $nombreUsuario . '</b></td>
+                    <td style="width: 320px;"><b>RESPONSABLE</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">' . $cargo . '</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">COVITEC LTDA</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+            </table>';
         } else {
-            $html .= '<img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <img src="' . $rutaFirma2 . '" alt="logo" width="250px" height="80px">
-            <p><b>__________________________________________</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________________<br>
-            <b>' . $nombreUsuario . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RESPONSABLE</b><br>
-            ' . $cargo . '<br>
-            COVITEC LTDA
-            </p>';
+            $html .= '
+            <table>
+            <tr role="row">
+                    <td style="width: 380px;"><img src="' . $rutaFirma . '" alt="sin firma" width="250px" height="80px"></td>
+                    <td style="width: 320px;"><img src="' . $rutaFirma2 . '" alt="sin firma" width="250px" height="80px"></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;"><b>__________________________________________</b></td>
+                    <td style="width: 320px;"><b>____________________________________</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;"><b>' . $nombreUsuario . '</b></td>
+                    <td style="width: 320px;"><b>RESPONSABLE</b></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">' . $cargo . '</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+                <tr role="row">
+                    <td style="width: 380px;">COVITEC LTDA</td>
+                    <td style="width: 320px;"></td>
+                </tr>
+            </table>';
         }
         $html .= '</div>
             <div id="evidencia" style="width: 650px;height: 100px">';

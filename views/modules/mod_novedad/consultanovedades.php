@@ -1,3 +1,14 @@
+<?php
+
+session_start();// activa la variable de sesion
+if (!$_SESSION["validar"]) {
+    header("location:Error403");
+    exit();
+}
+$nombresession = $_SESSION["nombre"];
+$apellidosession = $_SESSION["apellido"];
+$rol = $_SESSION["cargo"];
+?>
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -63,20 +74,22 @@
                         </select>
                     </div>
                 </div>
+
                 <div class="form-group">
 
 
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right">
+                        <?php if ($rol == 2 || $rol == 3 || $rol == 9) { ?>
+                            <a target="_blank" href="Novedad-ResumenExcel"
+                               class="btn btn-success"><i class="fa fa-file"></i>Resumen minuta Excel</a>
 
-                        <a target="_blank" href="Novedad-ResumenExcel"
-                           class="btn btn-success"><i class="fa fa-file"></i>Resumen minuta Excel</a>
-
-                        <a target="_blank" href="Novedad-ResumenActa"
-                           class="btn btn-warning"><i class="fa fa-file"></i>Resumen minuta PDF</a>
-
+                            <a target="_blank" href="Novedad-ResumenActa"
+                               class="btn btn-warning"><i class="fa fa-file"></i>Resumen minuta PDF</a>
+                        <?php } ?>
                         <button type="button" id="btnFiltrar" class="btn btn-primary">Consultar</button>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
@@ -101,7 +114,9 @@
                     <th>Reporta Novedad</th>
                     <th>Fecha Real N.</th>
                     <th>Evidencia</th>
+                    <?php if ($rol == 2 || $rol == 3 || $rol == 9) { ?>
                     <th>Estado</th>
+                    <?php } ?>
                     <th></th>
                 </tr>
                 </thead>
