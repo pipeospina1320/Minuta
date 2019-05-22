@@ -79,7 +79,7 @@ $rol = $_SESSION["cargo"];
 
 
                     <div class="col-md-12 col-sm-12 col-xs-12" align="right">
-                        <?php if ($rol == 2 || $rol == 3 || $rol == 9) { ?>
+                        <?php if ($rol == 2 || $rol == 3 || $rol == 4 || $rol == 9) { ?>
                             <a target="_blank" href="Novedad-ResumenExcel"
                                class="btn btn-success"><i class="fa fa-file"></i>Resumen minuta Excel</a>
 
@@ -114,8 +114,8 @@ $rol = $_SESSION["cargo"];
                     <th>Reporta Novedad</th>
                     <th>Fecha Real N.</th>
                     <th>Evidencia</th>
-                    <?php if ($rol == 2 || $rol == 3 || $rol == 9) { ?>
-                    <th>Estado</th>
+                    <?php if ($rol == 2 || $rol == 3 || $rol == 4 || $rol == 9) { ?>
+                        <th>Estado</th>
                     <?php } ?>
                     <th></th>
                 </tr>

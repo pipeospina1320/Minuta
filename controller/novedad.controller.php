@@ -301,7 +301,7 @@ class NovedadController
                 }
                 echo '</td>';
 
-                if ($rol == 2 || $rol == 3 || $rol == 9) {
+                if ($rol == 2 || $rol == 3 || $rol == 4 || $rol == 9) {
                     if ($item["nove_estado"] == 0) {
                         echo '<td style="text-align:center;"><button type="button" id="observacionnovedad" class="btn btn-warning btn-sm" value=' . $item["nove_id"] . '><i class="fa fa-edit fa-lg"></i></button></td>';
                     } else if ($item["nove_estado"] == 1) {
